@@ -48,21 +48,24 @@ O maior objetivo do jogo não é chegar no final, por mais que tudo aponte para 
 Período: 6 meses.
 Sociedade: 2 pessoas (Ana e Franciny).
 Renda prevista para as duas: 50% cada. 
-Valor que cada uma vai receber: 
-Por quanto vender o jogo?
+Valor que cada uma vai receber:R$20.000,00 cada 
+Por quanto vender o jogo?        
 
 Ter fontes de renda fora do jogo:
+Calculos com base de 15 mil pessoas por mês.
 Objetos pagos dentro do jogo
-Fases pagas
-Ganhar com propagandas 
+Fases pagas : R$5,00 cada fase -R$52.500,00 (5 x 15.000 - 30%)
+Ganhar com propagandas: Media de R$1.095.000,00 mensais.
 
 Despesas previstas:
 Taxa da play store 30% da renda das compras
-divulgação e propaganda
-mão de obra
+divulgação e propaganda :  R$10.000,00 mensais em divulgação 
 
 
 Receita - Despesa = Resto
+Receita = 52.500,00 + 1.095.000,00 = R$1.147.500,00
+Despesas = 10.000,00 + 40.000,00 = 50.000,00
+Resto= 1.147.500,00 - 50.000,00 =  R$1.097.500,00
 
 # Estudar controle de versão distribuído #6
 visto em aula
