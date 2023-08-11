@@ -30,7 +30,9 @@ Jogador#1: Íris _AdR Mensageira dos deuses. Íris é a correspondente feminina 
 Jogador#2: Alatar um personagem marcante e cativante que habita o mundo do jogo com sua inteligência excepcional, confiança inabalável e uma insaciável curiosidade pelo desconhecido. Seus olhos brilham com um brilho intenso, revelando sua mente afiada e mente analítica. Está constantemente buscando novos conhecimentos, explorando territórios desconhecidos e desafiando as convenções estabelecidas. 
 
 Universo: 
+
 Inspiração de universo (filme Soul, da Disney):
+
 Inspiração de labirinto (labirinto verde, em Nova Petrópolis):
 
 # Referências do jogo #3
@@ -93,7 +95,10 @@ visto em aula
 # Descrever as regras do jogo #8
 
 - Se comunicar apenas pelo chat de voz;
+  
 - Proibido qualquer discriminação;
+  
 - Ajudar o segundo jogador;
+  
 - Siga as instruções fornecidas durante o jogo;
 
