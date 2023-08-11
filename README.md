@@ -33,7 +33,9 @@ Inspiração de labirinto (labirinto verde, em Nova Petrópolis):
 # Referências do jogo #3
 
 Frase do filme do pequeno príncipe: “Só se vê bem com o coração, o essencial é invisível aos olhos.”
+
 Filme: soul disney;
+
 Labirinto verde, em Nova Petrópolis;
 
 # Objetivos do jogo #4
@@ -70,8 +72,8 @@ visto em aula
 
 # Descrever as regras do jogo #8
 
-Se comunicar apenas pelo chat de voz;
-Proibido qualquer discriminação;
-Ajudar o segundo jogador;
-Siga as instruções fornecidas durante o jogo;
+- Se comunicar apenas pelo chat de voz;
+- Proibido qualquer discriminação;
+- Ajudar o segundo jogador;
+- Siga as instruções fornecidas durante o jogo;
 
