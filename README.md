@@ -46,13 +46,9 @@ O maior objetivo do jogo não é chegar no final, por mais que tudo aponte para 
 # Formas de receita financeira #5
 
 Período: 6 meses.
-
 Sociedade: 2 pessoas (Ana e Franciny).
-
 Renda prevista para as duas: 50% cada. 
-
 Valor que cada uma vai receber:R$20.000,00 cada
-
 Por quanto vender o jogo?        
 
 Ter fontes de renda fora do jogo:
