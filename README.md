@@ -7,11 +7,14 @@ LINK: https://forms.gle/NcqUdCEKmURxS3bJA
 O jogo tem o intuito de fazer com que o jogador entenda que o sentido do jogo não é chegar no final, mas sim aprender e aproveitar cada desafio no caminho. Assim como na vida, diversas vezes nos deparamos com a reflexão sobre o que acontece quando chegamos ao fim da vida, e nos vemos angustiados por não ter uma resposta exata. Essa frustração, da busca por respostas pode acabar nos afastando do único momento em que temos certeza que acontece, o presente. 
 O jogo é composto por um labirinto redondo com paredes verdes de folhas, diversas saídas e em dimensão 2D. Ele se inicia com dois jogadores podendo se comunicar para se encontrarem, antes disso, precisam enfrentar um desafio inicial para dar início ao jogo (-------), (desafio que se refere a passagem da vida ------) e outro (-------) para conseguirem se encontrar e a partir do encontro seguirem o resto do percurso juntos (desafio que se refere a passagem da vida ------). 
 Após conseguirem se encontrar e seguir seus caminhos, se inicia os desafios juntos:
-(-------), (desafio que se refere a passagem da vida ------) 
-(-------), (desafio que se refere a passagem da vida ------) 
-(-------), (desafio que se refere a passagem da vida ------) 
+
 (-------), (desafio que se refere a passagem da vida ------) 
 
+(-------), (desafio que se refere a passagem da vida ------) 
+
+(-------), (desafio que se refere a passagem da vida ------) 
+
+(-------), (desafio que se refere a passagem da vida ------)
 
 
 # Como seria o jogo ideal #2
