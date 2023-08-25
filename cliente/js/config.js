@@ -1,4 +1,4 @@
-/*configuração do objeto game*/
+/* configuração do objeto game */
 
 export default {
   type: Phaser.AUTO,
@@ -17,6 +17,6 @@ export default {
     parent: 'game-container',
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 800,
-    height: 450 
+    height: 450
   }
 }
