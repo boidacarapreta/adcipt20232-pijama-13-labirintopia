@@ -4,7 +4,7 @@ export default class cena0 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('inicio.png', '../assets/inicio.png')
+    this.load.image('tela-inicial.png', '../assets/tela-inicial.png')
     this.load.spritesheet('derek', '../assets/Derek.png', {
       frameWidth: 64,
       frameHeight: 64
@@ -12,7 +12,7 @@ export default class cena0 extends Phaser.Scene {
   }
 
   create() {
-    this.imagem = this.add.image(400, 225, 'inicio.png')
+    this.imagem = this.add.image(400, 225, 'tela-inicial.png')
     this.personagem = this.physics.add.sprite(400, 225, 'derek')
       .setInteractive()
       .on('pointerdown', () => {
