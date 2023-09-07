@@ -31,5 +31,9 @@ export default class cena0 extends Phaser.Scene {
     })
   }
 
-  update() { }
+
+update() {
+
+
+}
 }
