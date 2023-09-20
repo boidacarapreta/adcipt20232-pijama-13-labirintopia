@@ -5,12 +5,10 @@ export default class sala extends Phaser.Scene {
 
   preload () {
     this.load.image('salas.png', './assets/salas.png')
-    this.load.image('grade', './assets/grade.png')
   }
 
   create () {
     this.imagem = this.add.image(400, 225, 'salas').setTint(0xcccccc)
-    this.grade = this.add.tileSprite(400, 225, 600, 300, 'grade')
     this.mensagem = this.add.text(100, 75, 'Escolha sua sala', {
       fontFamily: 'monospace',
       font: '32px Courier',
