@@ -2,15 +2,18 @@
 
 import config from './config.js'
 import cena0 from './cenas/cena0.js'
-import cenasala from './cenas/cena-sala.js'
+import sala from './cenas/cena-sala.js'
+import principal from './cenas/cena-principal.js'
 
 class Game extends Phaser.Game {
   constructor () {
     super(config)
 
     this.scene.add('cena0', cena0)
-    this.scene.add('cenasala', cenasala)
-    this.scene.start('cena0')
+    this.scene.add('sala', sala)
+    this.scene.add('principal', principal)
+
+    this.scene.start('principal')
   }
 }
 

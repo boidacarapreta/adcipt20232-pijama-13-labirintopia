@@ -4,115 +4,84 @@ export default class sala extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('salas.png', './assets/salas.png')
+    this.load.image('salas', './assets/salas.png')
+    this.load.image('vazio', '../assets/botoes/vazio.png')
   }
 
   create () {
     this.imagem = this.add.image(400, 225, 'salas').setTint(0xcccccc)
-    this.mensagem = this.add.text(100, 75, 'Escolha sua sala', {
-      fontFamily: 'monospace',
-      font: '32px Courier',
-      fill: '#cccccc'
-    })
+
     this.salas = [
       {
         numero: '1',
-        x: 150,
-        y: 125,
+        x: 135,
+        y: 195,
         botao: undefined
       },
       {
         numero: '2',
-        x: 150,
-        y: 175,
+        x: 282,
+        y: 195,
         botao: undefined
       },
       {
         numero: '3',
-        x: 150,
-        y: 225,
+        x: 514,
+        y: 195,
         botao: undefined
       },
       {
         numero: '4',
-        x: 150,
-        y: 275,
+        x: 672,
+        y: 195,
         botao: undefined
       },
       {
         numero: '5',
-        x: 150,
-        y: 325,
+        x: 217,
+        y: 295,
         botao: undefined
       },
       {
         numero: '6',
-        x: 450,
-        y: 125,
+        x: 400,
+        y: 295,
         botao: undefined
       },
       {
         numero: '7',
-        x: 450,
-        y: 175,
+        x: 593,
+        y: 295,
         botao: undefined
       },
       {
         numero: '8',
-        x: 450,
-        y: 225,
+        x: 318,
+        y: 359,
         botao: undefined
       },
       {
         numero: '9',
-        x: 450,
-        y: 275,
+        x: 505,
+        y: 359,
         botao: undefined
       },
       {
         numero: '10',
-        x: 450,
-        y: 325,
+        x: 394,
+        y: 425,
         botao: undefined
       }
     ]
 
     this.salas.forEach((item) => {
       item.botao = this.add
-        .text(item.x, item.y, '[Sala ' + item.numero + ']', {
-          fontFamily: 'monospace',
-          font: '32px Courier',
-          fill: '#cccccc'
-        })
+        .sprite(item.x, item.y, 'vazio')
         .setInteractive()
         .on('pointerdown', () => {
-          this.salas.forEach((item) => {
-            item.botao.destroy()
-          })
-          this.game.sala = item.numero
-          this.game.socket.emit('entrar-na-sala', this.game.sala)
+          this.game.scene.stop('sala')
+          this.game.scene.start('principal')
         })
-    })
-
-    this.game.socket.on('jogadores', (jogadores) => {
-      console.log(jogadores)
-      if (jogadores.segundo) {
-        this.mensagem.destroy()
-        this.game.jogadores = jogadores
-        this.game.scene.start('principal')
-      } else if (jogadores.primeiro) {
-        this.grade.destroy()
-        this.imagem.destroy()
-        this.mensagem.setText('Aguardando segundo jogador...')
-
-        /* Captura de áudio */
-        navigator.mediaDevices
-          .getUserMedia({ video: false, audio: true })
-          .then((stream) => {
-            this.game.midias = stream
-          })
-          .catch((error) => console.log(error))
-      }
     })
   }
 }

@@ -3,23 +3,22 @@ export default class cena0 extends Phaser.Scene {
     super('cena0')
   }
 
-  preload() {
+  preload () {
     this.load.image('tela-inicial.png', '../assets/tela-inicial.png')
     this.load.image('grade', '../assets/botoes/grade.png')
-    this.load.image('telacheia', '../assets/botoes/telacheia.png' {
+    this.load.spritesheet('telacheia', '../assets/botoes/telacheia.png', {
       frameWidth: 64,
       frameHeight: 64
     })
   }
 
-  create() {
+  create () {
     this.imagem = this.add.image(400, 225, 'tela-inicial.png')
     this.image = this.add.image(400, 408, 'grade')
       .setInteractive()
       .on('pointerdown', () => {
-
         this.game.scene.stop('cena0')
-        this.game.scene.start('cenasala')
+        this.game.scene.start('sala')
       })
 
     this.telacheia = this.add
@@ -37,9 +36,6 @@ export default class cena0 extends Phaser.Scene {
       .setScrollFactor(0, 0)
   }
 
-}
-update() {
-
-
-}
+  update () {
+  }
 }
