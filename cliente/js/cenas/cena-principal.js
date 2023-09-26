@@ -4,12 +4,14 @@ export default class principal extends Phaser.Scene {
   }
 
   preload () {
-    this.load.tilemapTiledJSON('labirinto', '../assets/mapa/mapa1.json')
+    this.load.tilemapTiledJSON('labirinto', '../assets/mapa/mapa.json')
 
-    this.load.image('basedechao', '../assets/mapa/basedechao.png')
-    this.load.image('ph', '../assets/mapa/ph.png')
-    this.load.image('pv', '../assets/mapa/pv.png')
-    this.load.image('quina', '../assets/mapa/quina.png')
+    this.load.image('terreno', '../assets/mapa/terreno.png')
+    this.load.image('base-parede', '../assets/mapa/base-parede.png')
+    this.load.image('parede-horizontal', '../assets/mapa/parede-horizontal.png')
+    this.load.image('parede-vertical', '../assets/mapa/parede-vertical.png')
+    this.load.image('topo-de-quina', '../assets/mapa/topo-de-quina.png')
+    this.load.image('base-quina', '../assets/mapa/base-quina.png')
   }
 
   create () { 
@@ -17,13 +19,15 @@ export default class principal extends Phaser.Scene {
       key: 'labirinto'
     })
 
-    this.tilesetBaseDeChao = this.tilemapLabirinto.addTilesetImage('basedechao')
-    this.tilesetPH = this.tilemapLabirinto.addTilesetImage('ph')
-    this.tilesetPV = this.tilemapLabirinto.addTilesetImage('pv')
-    this.tilesetQuina = this.tilemapLabirinto.addTilesetImage('quina')
+    this.tilesetTerreno = this.tilemapLabirinto.addTilesetImage('terreno')
+    this.tilesetBaseParede = this.tilemapLabirinto.addTilesetImage('base-parede')
+    this.tilesetParedeHorizontal = this.tilemapLabirinto.addTilesetImage('parede-horizontal')
+    this.tilesetParedeVertical = this.tilemapLabirinto.addTilesetImage('parede-vertical')
+    this.tilesetTopoDeQuina = this.tilemapLabirinto.addTilesetImage('topo-de-quina')
+    this.tilesetBaseQuina = this.tilemapLabirinto.addTilesetImage('base-quina')
 
-    this.layerTerreno = this.tilemapLabirinto.createLayer('terreno', [this.tilesetBaseDeChao])
-    this.layerParedes = this.tilemapLabirinto.createLayer('paredes', [this.tilesetPH, this.tilesetPV, this.tilesetQuina])
+    this.layerTerreno = this.tilemapLabirinto.createLayer('terreno', [this.tilesetTerreno])
+    this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede, this.tilesetParedeHorizontal, this.tilesetParedeVertical, this.tilesetTopoDeQuina, this.tilesetBaseQuina])
   }
 
   update () { }
