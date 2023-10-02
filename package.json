@@ -13,5 +13,8 @@
   "description": "Ps.: os desafios foram feitos com inspirações baseadas em uma pesquisa feita com os alunos do campus São José, com a seguinte pergunta:  Quais são os maiores desafios da vida?",
   "version": "0.1.0",
   "author": "Pijama 13 <ana18beatrizsilvajjj@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.7.2"
+  }
 }
