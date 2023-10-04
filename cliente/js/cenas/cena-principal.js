@@ -22,8 +22,8 @@ export default class principal extends Phaser.Scene {
     this.load.image('terreno.1', '../assets/mapa/terreno.1.png')
 
     this.load.spritesheet('íris', '../assets/personagens/íris.png', {
-      frameWidth: 50,
-      frameHeight: 51
+      frameWidth: 100,
+      frameHeight: 100
     })
 
     this.load.spritesheet('moeda', './assets/moeda.png', {
@@ -33,20 +33,20 @@ export default class principal extends Phaser.Scene {
     this.load.audio('moeda-som', '../assets/moeda.mp3')
 
     this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 128,
+      frameHeight: 128
     })
     this.load.spritesheet('direita', '../assets/botoes/direita.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 128,
+      frameHeight: 128
     })
     this.load.spritesheet('cima', '../assets/botoes/cima.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 128,
+      frameHeight: 128
     })
     this.load.spritesheet('baixo', '../assets/botoes/baixo.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 128,
+      frameHeight: 128
     })
   }
 
@@ -132,12 +132,20 @@ export default class principal extends Phaser.Scene {
 
     this.moedas = [
       {
-        x: 100,
-        y: 200
+        x: -642.6,
+        y: 4696.6
       },
       {
-        x: 200,
-        y: 200
+        x: -889.9,
+        y: 2607.9
+      },
+      {
+        x: 498,
+        y: 3495
+      },
+      {
+        x: 2430,
+        y: 2093
       }
     ]
 
@@ -158,7 +166,7 @@ export default class principal extends Phaser.Scene {
     })
 
     /* botões */
-    this.esquerda = this.add.sprite(50, 350, 'esquerda')
+    this.esquerda = this.add.sprite(10, 350, 'esquerda')
       .setScrollFactor(0)
       .setInteractive()
       .on('pointerover', () => {
@@ -172,7 +180,7 @@ export default class principal extends Phaser.Scene {
         this.personagem.setVelocityX(0)
       })
 
-    this.direita = this.add.sprite(150, 350, 'direita')
+    this.direita = this.add.sprite(190, 350, 'direita')
       .setScrollFactor(0)
       .setInteractive()
       .on('pointerover', () => {
@@ -186,7 +194,7 @@ export default class principal extends Phaser.Scene {
         this.personagem.setVelocityX(0)
       })
 
-    this.cima = this.add.sprite(100, 300, 'cima')
+    this.cima = this.add.sprite(100, 260, 'cima')
       .setScrollFactor(0)
       .setInteractive()
       .on('pointerover', () => {
@@ -200,7 +208,7 @@ export default class principal extends Phaser.Scene {
         this.personagem.setVelocityY(0)
       })
 
-    this.baixo = this.add.sprite(100, 400, 'baixo')
+    this.baixo = this.add.sprite(100, 450, 'baixo')
       .setScrollFactor(0)
       .setInteractive()
       .on('pointerover', () => {
