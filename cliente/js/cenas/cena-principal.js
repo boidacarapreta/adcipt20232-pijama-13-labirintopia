@@ -21,9 +21,9 @@ export default class principal extends Phaser.Scene {
     this.load.image('sombra8', '../assets/mapa/sombra8.png')
     this.load.image('terreno.1', '../assets/mapa/terreno.1.png')
 
-    this.load.spritesheet('azul', '../assets/mapa/azul.png', {
-      frameWidth: 64,
-      frameHeight: 64
+    this.load.spritesheet('íris', '../assets/personagens/íris.png', {
+      frameWidth: 50,
+      frameHeight: 51
     })
 
     this.load.spritesheet('moeda', './assets/moeda.png', {
@@ -75,56 +75,56 @@ export default class principal extends Phaser.Scene {
     this.tilesetBaseQuina1 = this.tilemapLabirinto.addTilesetImage('base-quina.1')
 
     this.layerTerreno = this.tilemapLabirinto.createLayer('terreno', [this.tilesetTerreno1])
-    this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede1, this.tilesetParedeHorizontal1, this.tilesetParedeVertical1, this.tilesetTopoDeQuina1, this.tilesetTopoDeQuina1])
-    this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7])
+    this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede1, this.tilesetParedeHorizontal1, this.tilesetParedeVertical1, this.tilesetBaseQuina1, this.tilesetTopoDeQuina1])
+    this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7, this.tilesetSombra8])
 
     /* personagens */
 
-    this.personagem = this.physics.add.sprite(-350, -80, 'azul', 18)
+    this.personagem = this.physics.add.sprite(-350, -80, 'íris', 18)
     this.cameras.main.startFollow(this.personagem)
-    this.cameras.main.setZoom(0.5)
+    this.cameras.main.setZoom(0.7)
 
     this.anims.create({
-      key: 'azul-parado',
-      frames: this.anims.generateFrameNumbers('azul', {
-        start: 0,
-        end: 6
+      key: 'íris-parado',
+      frames: this.anims.generateFrameNumbers('íris', {
+        start: 121,
+        end: 124
       }),
-      frameRate: 30,
+      frameRate: 10,
       repeat: -1
     })
     this.anims.create({
-      key: 'azul-esquerda',
-      frames: this.anims.generateFrameNumbers('azul', {
-        start: 7,
-        end: 12
-      }),
-      frameRate: 12,
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'azul-direita',
-      frames: this.anims.generateFrameNumbers('azul', {
-        start: 27,
-        end: 35
+      key: 'íris-esquerda',
+      frames: this.anims.generateFrameNumbers('íris', {
+        start: 76,
+        end: 84
       }),
       frameRate: 12,
       repeat: -1
     })
     this.anims.create({
-      key: 'azul-cima',
-      frames: this.anims.generateFrameNumbers('azul', {
-        start: 0,
-        end: 8
+      key: 'íris-direita',
+      frames: this.anims.generateFrameNumbers('íris', {
+        start: 94,
+        end: 102
       }),
       frameRate: 12,
       repeat: -1
     })
     this.anims.create({
-      key: 'azul-baixo',
-      frames: this.anims.generateFrameNumbers('azul', {
-        start: 18,
-        end: 26
+      key: 'íris-cima',
+      frames: this.anims.generateFrameNumbers('íris', {
+        start: 67,
+        end: 75
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'íris-baixo',
+      frames: this.anims.generateFrameNumbers('íris', {
+        start: 85,
+        end: 93
       }),
       frameRate: 12,
       repeat: -1
@@ -163,12 +163,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.esquerda.setFrame(1)
-        // this.personagem.anims.play('azul-esquerda')
+        this.personagem.anims.play('íris-esquerda')
         this.personagem.setVelocityX(-this.velocidade)
       })
       .on('pointerout', () => {
         this.esquerda.setFrame(0)
-        // this.personagem.anims.play('azul-parado')
+        this.personagem.anims.play('íris-parado')
         this.personagem.setVelocityX(0)
       })
 
@@ -177,12 +177,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.direita.setFrame(1)
-        //  this.personagem.anims.play('azul-direita')
+        this.personagem.anims.play('íris-direita')
         this.personagem.setVelocityX(this.velocidade)
       })
       .on('pointerout', () => {
         this.direita.setFrame(0)
-        //  this.personagem.anims.play('azul-parado')
+        this.personagem.anims.play('íris-parado')
         this.personagem.setVelocityX(0)
       })
 
@@ -191,12 +191,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.cima.setFrame(1)
-        //  this.personagem.anims.play('azul-cima')
+        this.personagem.anims.play('íris-cima')
         this.personagem.setVelocityY(-this.velocidade)
       })
       .on('pointerout', () => {
         this.cima.setFrame(0)
-        //  this.personagem.anims.play('azul-parado')
+        this.personagem.anims.play('íris-parado')
         this.personagem.setVelocityY(0)
       })
 
@@ -205,12 +205,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.baixo.setFrame(1)
-        // this.personagem.anims.play('azul-baixo')
+        this.personagem.anims.play('íris-baixo')
         this.personagem.setVelocityY(this.velocidade)
       })
       .on('pointerout', () => {
         this.baixo.setFrame(0)
-        //  this.personagem.anims.play('azul-parado')
+        this.personagem.anims.play('íris-parado')
         this.personagem.setVelocityY(0)
       })
 
