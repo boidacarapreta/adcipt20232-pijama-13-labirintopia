@@ -82,7 +82,7 @@ export default class principal extends Phaser.Scene {
 
     this.personagem = this.physics.add.sprite(-350, -80, 'íris', 18)
     this.cameras.main.startFollow(this.personagem)
-    this.cameras.main.setZoom(0.7)
+    this.cameras.main.setZoom(0.8)
 
     this.anims.create({
       key: 'íris-parado',
@@ -146,6 +146,26 @@ export default class principal extends Phaser.Scene {
       {
         x: 2430,
         y: 2093
+      },
+      {
+        x: 1851.9,
+        y: 4646.6
+      },
+      {
+        x: 1653.3,
+        y: 3377.3
+      },
+      {
+        x: 882,
+        y: 2842.6
+      },
+      {
+        x: -1289,
+        y: 2062.6
+      },
+      {
+        x: -437,
+        y: 4677.9
       }
     ]
 
