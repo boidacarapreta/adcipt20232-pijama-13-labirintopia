@@ -13,7 +13,6 @@ export default class sala extends Phaser.Scene {
   }
 
   create () {
-
     this.telacheia = this.add
       .sprite(750, 50, 'telacheia', 0)
       .setInteractive()
@@ -29,7 +28,6 @@ export default class sala extends Phaser.Scene {
       .setScrollFactor(0, 0)
 
     this.imagem = this.add.image(400, 225, 'salas').setTint(0xcccccc)
-
 
     this.salas = [
 
@@ -100,8 +98,13 @@ export default class sala extends Phaser.Scene {
         .sprite(item.x, item.y, 'vazio')
         .setInteractive()
         .on('pointerdown', () => {
-          this.game.scene.stop('sala')
-          this.game.scene.start('principal')
+          this.game.socket.on('jogadores', (jogadores) => {
+            this.game.jogadores = jogadores
+            console.log(jogadores)
+            this.game.scene.stop('sala')
+            this.game.scene.start('principal')
+          })
+          this.game.socket.emit('entrar-na-sala', item.numero)
         })
     })
   }

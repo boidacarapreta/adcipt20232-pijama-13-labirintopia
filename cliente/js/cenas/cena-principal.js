@@ -26,6 +26,11 @@ export default class principal extends Phaser.Scene {
       frameHeight: 100
     })
 
+    this.load.spritesheet('alatar', '../assets/personagens/alatar.png', {
+      frameWidth: 100,
+      frameHeight: 100
+    })
+
     this.load.spritesheet('moeda', './assets/moeda.png', {
       frameWidth: 32,
       frameHeight: 32
@@ -54,10 +59,17 @@ export default class principal extends Phaser.Scene {
     this.velocidade = 200
     this.moedaSom = this.sound.add('moeda-som')
 
-    /* mapa */
-    this.tilemapLabirinto = this.make.tilemap({
-      key: 'labirinto'
-    })
+    if (this.game.jogadores.primeniro === this.game.socket.id) {
+      this.personagem = this.physics.add.sprite(-350, -80, 'íris', 18)
+    } else if (this.game.jogadores.segundo === this.game.socket.id) {
+      this.personagem = this.physics.add.sprite(-350, -80, 'alatar', 18)
+    } else
+
+    /* mapa */ {
+      this.tilemapLabirinto = this.make.tilemap({
+        key: 'labirinto'
+      })
+    }
 
     this.tilesetSombra1 = this.tilemapLabirinto.addTilesetImage('sombra1')
     this.tilesetSombra2 = this.tilemapLabirinto.addTilesetImage('sombra2')
@@ -80,6 +92,58 @@ export default class principal extends Phaser.Scene {
 
     /* personagens */
 
+    /* alatar */
+    this.personagem = this.physics.add.sprite(-350, -80, 'alatar', 18)
+    this.cameras.main.startFollow(this.personagem)
+    this.cameras.main.setZoom(0.8)
+
+    this.anims.create({
+      key: 'alatar-parado',
+      frames: this.anims.generateFrameNumbers('alatar', {
+        start: 121,
+        end: 124
+      }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'alatar-esquerda',
+      frames: this.anims.generateFrameNumbers('alatar', {
+        start: 76,
+        end: 84
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'alatar-direita',
+      frames: this.anims.generateFrameNumbers('alatar', {
+        start: 94,
+        end: 102
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'alatar-cima',
+      frames: this.anims.generateFrameNumbers('alatar', {
+        start: 67,
+        end: 75
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'alatar-baixo',
+      frames: this.anims.generateFrameNumbers('alatar', {
+        start: 85,
+        end: 93
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+
+    /* íris */
     this.personagem = this.physics.add.sprite(-350, -80, 'íris', 18)
     this.cameras.main.startFollow(this.personagem)
     this.cameras.main.setZoom(0.8)
