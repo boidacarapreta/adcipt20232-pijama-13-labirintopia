@@ -100,8 +100,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: 'alatar-parado',
       frames: this.anims.generateFrameNumbers('alatar', {
-        start: 121,
-        end: 124
+        start: 108,
+        end: 110
       }),
       frameRate: 10,
       repeat: -1
@@ -109,8 +109,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: 'alatar-esquerda',
       frames: this.anims.generateFrameNumbers('alatar', {
-        start: 76,
-        end: 84
+        start: 69,
+        end: 77
       }),
       frameRate: 12,
       repeat: -1
@@ -118,8 +118,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: 'alatar-direita',
       frames: this.anims.generateFrameNumbers('alatar', {
-        start: 94,
-        end: 102
+        start: 87,
+        end: 95
       }),
       frameRate: 12,
       repeat: -1
@@ -127,8 +127,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: 'alatar-cima',
       frames: this.anims.generateFrameNumbers('alatar', {
-        start: 67,
-        end: 75
+        start: 60,
+        end: 68
       }),
       frameRate: 12,
       repeat: -1
@@ -136,8 +136,8 @@ export default class principal extends Phaser.Scene {
     this.anims.create({
       key: 'alatar-baixo',
       frames: this.anims.generateFrameNumbers('alatar', {
-        start: 85,
-        end: 93
+        start: 78,
+        end: 86
       }),
       frameRate: 12,
       repeat: -1
@@ -194,6 +194,7 @@ export default class principal extends Phaser.Scene {
       repeat: -1
     })
 
+    /* MOEDAS */
     this.moedas = [
       {
         x: -642.6,
