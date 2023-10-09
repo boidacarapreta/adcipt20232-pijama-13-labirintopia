@@ -60,9 +60,9 @@ export default class principal extends Phaser.Scene {
     this.moedaSom = this.sound.add('moeda-som')
 
     if (this.game.jogadores.primeniro === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(-350, -80, 'íris', 18)
+      this.personagem = this.physics.add.sprite(1520.6, 346.6, 'íris', 18)
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(-350, -80, 'alatar', 18)
+      this.personagem = this.physics.add.sprite(3136.6, 366.5, 'alatar', 18)
     } else
 
     /* mapa */ {
@@ -93,7 +93,7 @@ export default class principal extends Phaser.Scene {
     /* personagens */
 
     /* alatar */
-    this.personagem = this.physics.add.sprite(-350, -80, 'alatar', 18)
+    this.personagem = this.physics.add.sprite(3136.6, 366.5, 'alatar', 18)
     this.cameras.main.startFollow(this.personagem)
     this.cameras.main.setZoom(0.8)
 
@@ -144,7 +144,7 @@ export default class principal extends Phaser.Scene {
     })
 
     /* íris */
-    this.personagem = this.physics.add.sprite(-350, -80, 'íris', 18)
+    this.personagem = this.physics.add.sprite(1520.6, 346.6, 'íris', 18)
     this.cameras.main.startFollow(this.personagem)
     this.cameras.main.setZoom(0.8)
 
@@ -197,41 +197,58 @@ export default class principal extends Phaser.Scene {
     /* MOEDAS */
     this.moedas = [
       {
-        x: -642.6,
-        y: 4696.6
+        x: 3455.9,
+        y: 4777.9
       },
       {
-        x: -889.9,
-        y: 2607.9
+        x: 693.3,
+        y: 2749.3
       },
       {
-        x: 498,
-        y: 3495
+        x: 960.6,
+        y: 4780
       },
       {
-        x: 2430,
-        y: 2093
+        x: 3003.3,
+        y: 2212
       },
       {
-        x: 1851.9,
-        y: 4646.6
+        x: 1924.3,
+        y: 4272
       },
       {
-        x: 1653.3,
-        y: 3377.3
+        x: 2102.6,
+        y: 3584.6
       },
       {
-        x: 882,
-        y: 2842.6
+        x: 1311.3,
+        y: 2732.6
       },
       {
-        x: -1289,
-        y: 2062.6
+        x: 309.3,
+        y: 2192
       },
       {
-        x: -437,
-        y: 4677.9
+        x: 2485.3,
+        y: 2979.9
+      },
+      {
+        x: 4411.9,
+        y: 3503.9
+      },
+      {
+        x: 3634,
+        y: 3250
+      },
+      {
+        x: 3450.6,
+        y: 4028.6
+      },
+      {
+        x: 2678.6,
+        y: 3513.3
       }
+
     ]
 
     this.anims.create({
