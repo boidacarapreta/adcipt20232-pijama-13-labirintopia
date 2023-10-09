@@ -59,17 +59,10 @@ export default class principal extends Phaser.Scene {
     this.velocidade = 200
     this.moedaSom = this.sound.add('moeda-som')
 
-    if (this.game.jogadores.primeniro === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(1520.6, 346.6, 'íris', 18)
-    } else if (this.game.jogadores.segundo === this.game.socket.id) {
-      this.personagem = this.physics.add.sprite(3136.6, 366.5, 'alatar', 18)
-    } else
-
-    /* mapa */ {
-      this.tilemapLabirinto = this.make.tilemap({
-        key: 'labirinto'
-      })
-    }
+    /* mapa */
+    this.tilemapLabirinto = this.make.tilemap({
+      key: 'labirinto'
+    })
 
     this.tilesetSombra1 = this.tilemapLabirinto.addTilesetImage('sombra1')
     this.tilesetSombra2 = this.tilemapLabirinto.addTilesetImage('sombra2')
@@ -91,104 +84,64 @@ export default class principal extends Phaser.Scene {
     this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7, this.tilesetSombra8])
 
     /* personagens */
+    if (this.game.jogadores.primeiro === this.game.socket.id) {
+      this.local = 'íris'
+      this.remoto = 'alatar'
+      this.personagem = this.physics.add.sprite(1520.6, 346.6, this.local, 0)
+      this.personagemRemoto = this.add.sprite(3136.6, 366.5, this.remoto, 0)
+    } else if (this.game.jogadores.segundo === this.game.socket.id) {
+      this.local = 'alatar'
+      this.remoto = 'íris'
+      this.personagem = this.physics.add.sprite(3136.6, 366.5, this.local, 0)
+      this.personagemRemoto = this.add.sprite(1520.6, 346.6, this.remoto, 0)
+    } else { //
+    }
 
-    /* alatar */
-    this.personagem = this.physics.add.sprite(3136.6, 366.5, 'alatar', 18)
+    /* íris e alatar */
     this.cameras.main.startFollow(this.personagem)
     this.cameras.main.setZoom(0.8)
 
     this.anims.create({
-      key: 'alatar-parado',
-      frames: this.anims.generateFrameNumbers('alatar', {
-        start: 108,
-        end: 110
+      key: 'personagem-parado',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 0,
+        end: 0
       }),
       frameRate: 10,
       repeat: -1
     })
     this.anims.create({
-      key: 'alatar-esquerda',
-      frames: this.anims.generateFrameNumbers('alatar', {
-        start: 69,
-        end: 77
+      key: 'personagem-esquerda',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 10,
+        end: 18
       }),
       frameRate: 12,
       repeat: -1
     })
     this.anims.create({
-      key: 'alatar-direita',
-      frames: this.anims.generateFrameNumbers('alatar', {
-        start: 87,
-        end: 95
+      key: 'personagem-direita',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 28,
+        end: 36
       }),
       frameRate: 12,
       repeat: -1
     })
     this.anims.create({
-      key: 'alatar-cima',
-      frames: this.anims.generateFrameNumbers('alatar', {
-        start: 60,
-        end: 68
+      key: 'personagem-cima',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 1,
+        end: 9
       }),
       frameRate: 12,
       repeat: -1
     })
     this.anims.create({
-      key: 'alatar-baixo',
-      frames: this.anims.generateFrameNumbers('alatar', {
-        start: 78,
-        end: 86
-      }),
-      frameRate: 12,
-      repeat: -1
-    })
-
-    /* íris */
-    this.personagem = this.physics.add.sprite(1520.6, 346.6, 'íris', 18)
-    this.cameras.main.startFollow(this.personagem)
-    this.cameras.main.setZoom(0.8)
-
-    this.anims.create({
-      key: 'íris-parado',
-      frames: this.anims.generateFrameNumbers('íris', {
-        start: 121,
-        end: 124
-      }),
-      frameRate: 10,
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'íris-esquerda',
-      frames: this.anims.generateFrameNumbers('íris', {
-        start: 76,
-        end: 84
-      }),
-      frameRate: 12,
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'íris-direita',
-      frames: this.anims.generateFrameNumbers('íris', {
-        start: 94,
-        end: 102
-      }),
-      frameRate: 12,
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'íris-cima',
-      frames: this.anims.generateFrameNumbers('íris', {
-        start: 67,
-        end: 75
-      }),
-      frameRate: 12,
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'íris-baixo',
-      frames: this.anims.generateFrameNumbers('íris', {
-        start: 85,
-        end: 93
+      key: 'personagem-baixo',
+      frames: this.anims.generateFrameNumbers(this.local, {
+        start: 19,
+        end: 27
       }),
       frameRate: 12,
       repeat: -1
@@ -273,12 +226,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.esquerda.setFrame(1)
-        this.personagem.anims.play('íris-esquerda')
+        this.personagem.anims.play('personagem-esquerda')
         this.personagem.setVelocityX(-this.velocidade)
       })
       .on('pointerout', () => {
         this.esquerda.setFrame(0)
-        this.personagem.anims.play('íris-parado')
+        this.personagem.anims.play('personagem-parado')
         this.personagem.setVelocityX(0)
       })
 
@@ -287,12 +240,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.direita.setFrame(1)
-        this.personagem.anims.play('íris-direita')
+        this.personagem.anims.play('personagem-direita')
         this.personagem.setVelocityX(this.velocidade)
       })
       .on('pointerout', () => {
         this.direita.setFrame(0)
-        this.personagem.anims.play('íris-parado')
+        this.personagem.anims.play('personagem-parado')
         this.personagem.setVelocityX(0)
       })
 
@@ -301,12 +254,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.cima.setFrame(1)
-        this.personagem.anims.play('íris-cima')
+        this.personagem.anims.play('personagem-cima')
         this.personagem.setVelocityY(-this.velocidade)
       })
       .on('pointerout', () => {
         this.cima.setFrame(0)
-        this.personagem.anims.play('íris-parado')
+        this.personagem.anims.play('personagem-parado')
         this.personagem.setVelocityY(0)
       })
 
@@ -315,12 +268,12 @@ export default class principal extends Phaser.Scene {
       .setInteractive()
       .on('pointerover', () => {
         this.baixo.setFrame(1)
-        this.personagem.anims.play('íris-baixo')
+        this.personagem.anims.play('personagem-baixo')
         this.personagem.setVelocityY(this.velocidade)
       })
       .on('pointerout', () => {
         this.baixo.setFrame(0)
-        this.personagem.anims.play('íris-parado')
+        this.personagem.anims.play('personagem-parado')
         this.personagem.setVelocityY(0)
       })
 
