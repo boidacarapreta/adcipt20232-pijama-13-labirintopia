@@ -93,9 +93,9 @@ export default class sala extends Phaser.Scene {
       }
     ]
 
-    this.salas.forEach((item) => {
-      item.botao = this.add
-        .sprite(item.x, item.y, 'vazio')
+    this.salas.forEach((sala) => {
+      sala.botao = this.add
+        .sprite(sala.x, sala.y, 'vazio')
         .setInteractive()
         .on('pointerdown', () => {
           this.game.socket.on('jogadores', (jogadores) => {
@@ -104,7 +104,13 @@ export default class sala extends Phaser.Scene {
             this.game.scene.stop('sala')
             this.game.scene.start('principal')
           })
-          this.game.socket.emit('entrar-na-sala', item.numero)
+          this.game.socket.emit('entrar-na-sala', sala.numero)
+          this.game.sala = sala.numero
+          this.aguarde = this.add
+            .text(this.game.config.width / 2,
+              this.game.config.heigth / 2,
+              'Conectando...'
+            )
         })
     })
   }

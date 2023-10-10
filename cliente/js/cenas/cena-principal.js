@@ -279,9 +279,26 @@ export default class principal extends Phaser.Scene {
 
     this.layerParede.setCollisionByProperty({ collides: true })
     this.physics.add.collider(this.personagem, this.layerParede)
+
+    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
+      this.personagemRemoto.x = x
+      this.personagemRemoto.y = y
+      this.personagemRemoto.setFrame(frame)
+    })
   }
 
-  update () { }
+  update () {
+    try {
+      this.game.socket.emit('estado-publicar', this.game.sala, {
+        cena: 'principal',
+        x: this.personagem.x,
+        y: this.personagem.y,
+        frame: this.personagem.frame.name
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   coletar_moeda (personagem, moeda) {
     this.moedaSom.play()
