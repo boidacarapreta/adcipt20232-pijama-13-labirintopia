@@ -25,16 +25,19 @@ export default class principal extends Phaser.Scene {
       frameWidth: 100,
       frameHeight: 100
     })
-
     this.load.spritesheet('alatar', '../assets/personagens/alatar.png', {
       frameWidth: 100,
       frameHeight: 100
     })
-
+    this.load.spritesheet('morte', '../assets/personagens/morte.png', {
+      frameWidth: 100,
+      frameHeight: 100
+    })
     this.load.spritesheet('moeda', './assets/moeda.png', {
       frameWidth: 32,
       frameHeight: 32
     })
+
     this.load.audio('moeda-som', '../assets/moeda.mp3')
 
     this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
@@ -96,6 +99,55 @@ export default class principal extends Phaser.Scene {
       this.personagemRemoto = this.add.sprite(1520.6, 346.6, this.remoto, 0)
     } else { //
     }
+
+    /* morte */
+    this.physics.add.sprite(1520.6, 346.6, morte, 0)
+
+    this.anims.create({
+      key: 'morte-parado',
+      frames: this.anims.generateFrameNumbers(morte, {
+        start: 0,
+        end: 0
+      }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'morte-esquerda',
+      frames: this.anims.generateFrameNumbers(morte, {
+        start: 10,
+        end: 18
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'morte-direita',
+      frames: this.anims.generateFrameNumbers(morte, {
+        start: 28,
+        end: 36
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'morte-cima',
+      frames: this.anims.generateFrameNumbers(morte, {
+        start: 1,
+        end: 9
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'morte-baixo',
+      frames: this.anims.generateFrameNumbers(morte, {
+        start: 19,
+        end: 27
+      }),
+      frameRate: 12,
+      repeat: -1
+    })
 
     /* íris e alatar */
     this.cameras.main.startFollow(this.personagem)
@@ -213,12 +265,14 @@ export default class principal extends Phaser.Scene {
       frameRate: 15,
       repeat: -1
     })
-
+s
     this.moedas.forEach((moeda) => {
       moeda.objeto = this.physics.add.sprite(moeda.x, moeda.y, 'moeda')
       moeda.objeto.anims.play('moeda-girando')
       this.physics.add.collider(this.personagem, moeda.objeto, this.coletar_moeda, null, this)
     })
+
+
 
     /* botões */
     this.esquerda = this.add.sprite(10, 350, 'esquerda')
@@ -278,7 +332,11 @@ export default class principal extends Phaser.Scene {
       })
 
     this.layerParede.setCollisionByProperty({ collides: true })
+    this.layerSombra.setCollisionByProperty({ collides: true })
+
     this.physics.add.collider(this.personagem, this.layerParede)
+    this.physics.add.collider(thiis.personagem, this.layerSombra)
+
 
     this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
       this.personagemRemoto.x = x
