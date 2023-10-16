@@ -38,7 +38,7 @@ export default class principal extends Phaser.Scene {
       frameHeight: 32
     })
 
-    this.load.audio('moeda-som', '../assets/moeda.mp3')
+    this.load.audio('moeda-som', '../assets/audiomoeda.mp3')
 
     this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
       frameWidth: 128,
@@ -101,11 +101,11 @@ export default class principal extends Phaser.Scene {
     }
 
     /* morte */
-    this.physics.add.sprite(1520.6, 346.6, morte, 0)
+    this.morte = this.physics.add.image(3136, 366, 'morte')
 
     this.anims.create({
       key: 'morte-parado',
-      frames: this.anims.generateFrameNumbers(morte, {
+      frames: this.anims.generateFrameNumbers('morte', {
         start: 0,
         end: 0
       }),
@@ -114,7 +114,7 @@ export default class principal extends Phaser.Scene {
     })
     this.anims.create({
       key: 'morte-esquerda',
-      frames: this.anims.generateFrameNumbers(morte, {
+      frames: this.anims.generateFrameNumbers('morte', {
         start: 10,
         end: 18
       }),
@@ -123,7 +123,7 @@ export default class principal extends Phaser.Scene {
     })
     this.anims.create({
       key: 'morte-direita',
-      frames: this.anims.generateFrameNumbers(morte, {
+      frames: this.anims.generateFrameNumbers('morte', {
         start: 28,
         end: 36
       }),
@@ -132,7 +132,7 @@ export default class principal extends Phaser.Scene {
     })
     this.anims.create({
       key: 'morte-cima',
-      frames: this.anims.generateFrameNumbers(morte, {
+      frames: this.anims.generateFrameNumbers('morte', {
         start: 1,
         end: 9
       }),
@@ -141,7 +141,7 @@ export default class principal extends Phaser.Scene {
     })
     this.anims.create({
       key: 'morte-baixo',
-      frames: this.anims.generateFrameNumbers(morte, {
+      frames: this.anims.generateFrameNumbers('morte', {
         start: 19,
         end: 27
       }),
