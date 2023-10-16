@@ -33,7 +33,7 @@ export default class principal extends Phaser.Scene {
       frameWidth: 100,
       frameHeight: 100
     })
-    this.load.spritesheet('moeda', './assets/moeda.png', {
+    this.load.spritesheet('coração', './assets/coração.png', {
       frameWidth: 32,
       frameHeight: 32
     })
@@ -60,7 +60,7 @@ export default class principal extends Phaser.Scene {
 
   create () {
     this.velocidade = 200
-    this.moedaSom = this.sound.add('moeda-som')
+    this.moedaSom = this.sound.add('coração-som')
 
     /* mapa */
     this.tilemapLabirinto = this.make.tilemap({
@@ -200,7 +200,7 @@ export default class principal extends Phaser.Scene {
     })
 
     /* MOEDAS */
-    this.moedas = [
+    this.coração = [
       {
         x: 3455.9,
         y: 4777.9
@@ -257,22 +257,20 @@ export default class principal extends Phaser.Scene {
     ]
 
     this.anims.create({
-      key: 'moeda-girando',
-      frames: this.anims.generateFrameNumbers('moeda', {
+      key: 'coração-girando',
+      frames: this.anims.generateFrameNumbers('coração', {
         start: 0,
         end: 3
       }),
       frameRate: 15,
       repeat: -1
     })
-s
-    this.moedas.forEach((moeda) => {
-      moeda.objeto = this.physics.add.sprite(moeda.x, moeda.y, 'moeda')
-      moeda.objeto.anims.play('moeda-girando')
-      this.physics.add.collider(this.personagem, moeda.objeto, this.coletar_moeda, null, this)
+
+    this.coração.forEach((coração) => {
+      coração.objeto = this.physics.add.sprite(coração.x, coração.y, 'coração')
+      coração.objeto.anims.play('coração-girando')
+      this.physics.add.collider(this.personagem, coração.objeto, this.coletar_coração, null, this)
     })
-
-
 
     /* botões */
     this.esquerda = this.add.sprite(10, 350, 'esquerda')
@@ -335,8 +333,7 @@ s
     this.layerSombra.setCollisionByProperty({ collides: true })
 
     this.physics.add.collider(this.personagem, this.layerParede)
-    this.physics.add.collider(thiis.personagem, this.layerSombra)
-
+    this.physics.add.collider(this.personagem, this.layerSombra)
 
     this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
       this.personagemRemoto.x = x
@@ -358,8 +355,8 @@ s
     }
   }
 
-  coletar_moeda (personagem, moeda) {
+  coletar_coração (personagem, coração) {
     this.moedaSom.play()
-    moeda.disableBody(true, true)
+    coração.disableBody(true, true)
   }
 }
