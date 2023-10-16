@@ -37,6 +37,10 @@ export default class principal extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     })
+    this.load.spritesheet('moeda', './assets/moeda.png', {
+      frameWidth: 32,
+      frameHeight: 32
+    })
 
     this.load.audio('moeda-som', '../assets/audiomoeda.mp3')
 
@@ -60,7 +64,7 @@ export default class principal extends Phaser.Scene {
 
   create () {
     this.velocidade = 200
-    this.moedaSom = this.sound.add('coração-som')
+    this.moedaSom = this.sound.add('moeda-som')
 
     /* mapa */
     this.tilemapLabirinto = this.make.tilemap({
@@ -200,6 +204,18 @@ export default class principal extends Phaser.Scene {
     })
 
     /* MOEDAS */
+
+      this.moeda = [
+        {
+          x: 3455.9,
+          y: 4777.9
+        },
+        {
+          x: 693.3,
+          y: 2749.3
+        },
+
+
     this.coração = [
       {
         x: 3455.9,
