@@ -34,15 +34,16 @@ export default class principal extends Phaser.Scene {
       frameHeight: 100
     })
     this.load.spritesheet('coração', './assets/coração.png', {
-      frameWidth: 32,
-      frameHeight: 32
+      frameWidth: 45,
+      frameHeight: 45
     })
     this.load.spritesheet('moeda', './assets/moeda.png', {
-      frameWidth: 32,
-      frameHeight: 32
+      frameWidth: 45,
+      frameHeight: 45
     })
 
     this.load.audio('moeda-som', '../assets/audiomoeda.mp3')
+    this.load.audio('ambiente-som', '../assets/audioambiente.mp3')
 
     this.load.spritesheet('esquerda', '../assets/botoes/esquerda.png', {
       frameWidth: 128,
@@ -63,6 +64,10 @@ export default class principal extends Phaser.Scene {
   }
 
   create () {
+    this.ambienteSom = this.sound.add('ambiente-som')
+    this.ambienteSom.loop = true
+    this.ambienteSom.play()
+
     this.velocidade = 200
     this.moedaSom = this.sound.add('moeda-som')
 
@@ -205,16 +210,108 @@ export default class principal extends Phaser.Scene {
 
     /* MOEDAS */
 
-      this.moeda = [
-        {
-          x: 3455.9,
-          y: 4777.9
-        },
-        {
-          x: 693.3,
-          y: 2749.3
-        },
+    this.moeda = [
+      {
+        x: 1407,
+        y: 640
+      },
+      {
+        x: 824,
+        y: 1187
+      },
+      {
+        x: 2444,
+        y: 378
+      },
+      {
+        x: 3272,
+        y: 640
+      },
+      {
+        x: 3842,
+        y: 1187
+      },
+      {
+        x: 3330,
+        y: 1712
+      },
+      {
+        x: 1217,
+        y: 960
+      },
+      {
+        x: 3409,
+        y: 960
+      },
+      {
+        x: 1426,
+        y: 1712
+      },
+      {
+        x: 639,
+        y: 1965
+      },
+      {
+        x: 3410,
+        y: 1965
+      }.
+      {
+        x: 1234,
+        y: 1979
+      },
+      {
+        x: 4027,
+        y: 1979
+      },
+      {
+        x: 1848,
+        y: 1456
+      },
+      {
+        x: 1208,
+        y: 1456
+      },
+      {
+        x:2811,
+        y: 1456
+      },
+      {
+        x: 3451,
+        y: 1456
+      },
+      {
+        x: 1599,
+        y: 904
+      },
+      {
+        x: 1825,
+        y: 1014
+      },
+      {
+        x: 2808,
+        y: 1014
+      },
+      {
+        x: 3062,
+        y: 904
+      }
+    ]
 
+    this.anims.create({
+      key: 'moeda-girando',
+      frames: this.anims.generateFrameNumbers('moeda', {
+        start: 0,
+        end: 4
+      }),
+      frameRate: 6,
+      repeat: -1
+    })
+
+    this.moeda.forEach((moeda) => {
+      moeda.objeto = this.physics.add.sprite(moeda.x, moeda.y, 'moeda')
+      moeda.objeto.anims.play('moeda-girando')
+      this.physics.add.collider(this.personagem, moeda.objeto, this.coletar_moeda, null, this)
+    })
 
     this.coração = [
       {
@@ -276,9 +373,9 @@ export default class principal extends Phaser.Scene {
       key: 'coração-girando',
       frames: this.anims.generateFrameNumbers('coração', {
         start: 0,
-        end: 3
+        end: 4
       }),
-      frameRate: 15,
+      frameRate: 4,
       repeat: -1
     })
 
@@ -369,6 +466,11 @@ export default class principal extends Phaser.Scene {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  coletar_moeda (personagem, moeda) {
+    this.moedaSom.play()
+    moeda.disableBody(true, true)
   }
 
   coletar_coração (personagem, coração) {
