@@ -110,7 +110,7 @@ export default class principal extends Phaser.Scene {
     }
 
     /* morte */
-    this.morte = this.physics.add.image(3136, 366, 'morte')
+    this.morte = this.physics.add.image(4413, 3523, 'morte')
 
     this.anims.create({
       key: 'morte-parado',
@@ -224,6 +224,10 @@ export default class principal extends Phaser.Scene {
         y: 378
       },
       {
+        x: 2254,
+        y: 378
+      },
+      {
         x: 3272,
         y: 640
       },
@@ -254,7 +258,7 @@ export default class principal extends Phaser.Scene {
       {
         x: 3410,
         y: 1965
-      }.
+      },
       {
         x: 1234,
         y: 1979
@@ -272,7 +276,7 @@ export default class principal extends Phaser.Scene {
         y: 1456
       },
       {
-        x:2811,
+        x: 2811,
         y: 1456
       },
       {
