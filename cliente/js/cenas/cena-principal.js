@@ -71,7 +71,6 @@ export default class principal extends Phaser.Scene {
     this.moedaSom = this.sound.add('moeda-som')
     this.morteSom = this.sound.add('morte-som')
 
-
     this.velocidade = 200
     this.vida = 1
 
@@ -465,143 +464,143 @@ export default class principal extends Phaser.Scene {
           this.personagem.anims.play('personagem-baixo')
           this.personagem.setVelocityY(this.velocidade)
         }
-        })
-      .on ('pointerout', () => {
-  this.baixo.setFrame(0)
-  this.personagem.anims.play('personagem-parado')
-  this.personagem.setVelocityY(0)
-})
+      })
+      .on('pointerout', () => {
+        this.baixo.setFrame(0)
+        this.personagem.anims.play('personagem-parado')
+        this.personagem.setVelocityY(0)
+      })
 
-this.layerParede.setCollisionByProperty({ collides: true })
-this.layerSombra.setCollisionByProperty({ collides: true })
+    this.layerParede.setCollisionByProperty({ collides: true })
+    this.layerSombra.setCollisionByProperty({ collides: true })
 
-this.physics.add.collider(this.personagem, this.layerParede)
-this.physics.add.collider(this.personagem, this.layerSombra)
+    this.physics.add.collider(this.personagem, this.layerParede)
+    this.physics.add.collider(this.personagem, this.layerSombra)
 
-this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
-  this.personagemRemoto.x = x
-  this.personagemRemoto.y = y
-  this.personagemRemoto.setFrame(frame)
-})
-
-this.game.socket.on('artefatos-notificar', (artefatos) => {
-  if (artefatos.moeda) {
-    for (let i = 0; i < artefatos.moeda.length; i++) {
-      if (!artefatos.moeda[i]) {
-        this.moeda[i].objeto.disableBody(true, true)
-      }
-    }
-  }
-  if (artefatos.coração) {
-    for (let i = 0; i < artefatos.coração.length; i++) {
-      if (!artefatos.coração[i]) {
-        this.coração[i].objeto.disableBody(true, true)
-      }
-    }
-  }
-})
-  }
-
-update() {
-  try {
-    this.game.socket.emit('estado-publicar', this.game.sala, {
-      cena: 'principal',
-      x: this.personagem.x,
-      y: this.personagem.y,
-      frame: this.personagem.frame.name
+    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
+      this.personagemRemoto.x = x
+      this.personagemRemoto.y = y
+      this.personagemRemoto.setFrame(frame)
     })
-  } catch (error) {
-    console.error(error)
+
+    this.game.socket.on('artefatos-notificar', (artefatos) => {
+      if (artefatos.moeda) {
+        for (let i = 0; i < artefatos.moeda.length; i++) {
+          if (!artefatos.moeda[i]) {
+            this.moeda[i].objeto.disableBody(true, true)
+          }
+        }
+      }
+      if (artefatos.coração) {
+        for (let i = 0; i < artefatos.coração.length; i++) {
+          if (!artefatos.coração[i]) {
+            this.coração[i].objeto.disableBody(true, true)
+          }
+        }
+      }
+    })
   }
 
-  if (this.vida > 0 && this.morte.visible) {
-    /* morte segue personagem mais próximo */
-    let hipotenusa_personagem = Phaser.Math.Distance.Between(
-      this.personagem.x,
-      this.morte.x,
-      this.personagem.y,
-      this.morte.y
-    );
-
-    let hipotenusa_personagemRemoto = Phaser.Math.Distance.Between(
-      this.personagemRemoto.x,
-      this.morte.x,
-      this.personagemRemoto.y,
-      this.morte.y
-    );
-
-    /* Por padrão, o primeiro jogador é o alvo */
-    let alvo = this.personagem;
-    if (hipotenusa_personagem > hipotenusa_personagemRemoto) {
-      /* Jogador 2 é perseguido pelo morte */
-      alvo = this.personagemRemoto;
-    }
-
-    /* Sentido no eixo X */
-    let diffX = alvo.x - this.morte.x;
-    if (diffX >= 10) {
-      this.morte.setVelocityX(30);
-    } else if (diffX <= 10) {
-      this.morte.setVelocityX(-30);
-    }
-
-    /* Sentido no eixo Y */
-    let diffY = alvo.y - this.morte.y;
-    if (diffY >= 10) {
-      this.morte.setVelocityY(50);
-    } else if (diffY <= 10) {
-      this.morte.setVelocityY(-50);
-    }
-
-    /* Animação */
+  update () {
     try {
-      if (diffX > 0) {
-        this.morte.anims.play("morte-direita", true);
-      } else if (diffX < 0) {
-        this.morte.anims.play("morte-esquerda", true);
-      } else if (diffY > 0) {
-        this.morte.anims.play("morte-baixo", true);
-      } else if (diffY < 0) {
-        this.morte.anims.play("morte-cima", true);
-      } else {
-        this.morte.anims.play("morte");
-      }
+      this.game.socket.emit('estado-publicar', this.game.sala, {
+        cena: 'principal',
+        x: this.personagem.x,
+        y: this.personagem.y,
+        frame: this.personagem.frame.name
+      })
     } catch (error) {
       console.error(error)
     }
-  } else {
-    // morte pegou o personagem
+
+    if (this.vida > 0 && this.morte.visible) {
+      /* morte segue personagem mais próximo */
+      const hipotenusa_personagem = Phaser.Math.Distance.Between(
+        this.personagem.x,
+        this.morte.x,
+        this.personagem.y,
+        this.morte.y
+      )
+
+      const hipotenusa_personagemRemoto = Phaser.Math.Distance.Between(
+        this.personagemRemoto.x,
+        this.morte.x,
+        this.personagemRemoto.y,
+        this.morte.y
+      )
+
+      /* Por padrão, o primeiro jogador é o alvo */
+      let alvo = this.personagem
+      if (hipotenusa_personagem > hipotenusa_personagemRemoto) {
+        /* Jogador 2 é perseguido pelo morte */
+        alvo = this.personagemRemoto
+      }
+
+      /* Sentido no eixo X */
+      const diffX = alvo.x - this.morte.x
+      if (diffX >= 10) {
+        this.morte.setVelocityX(80)
+      } else if (diffX <= 10) {
+        this.morte.setVelocityX(-80)
+      }
+
+      /* Sentido no eixo Y */
+      const diffY = alvo.y - this.morte.y
+      if (diffY >= 10) {
+        this.morte.setVelocityY(100)
+      } else if (diffY <= 10) {
+        this.morte.setVelocityY(-100)
+      }
+
+      /* Animação */
+      try {
+        if (diffX > 0) {
+          this.morte.anims.play('morte-direita', true)
+        } else if (diffX < 0) {
+          this.morte.anims.play('morte-esquerda', true)
+        } else if (diffY > 0) {
+          this.morte.anims.play('morte-baixo', true)
+        } else if (diffY < 0) {
+          this.morte.anims.play('morte-cima', true)
+        } else {
+          this.morte.anims.play('morte')
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    } else {
+      // morte pegou o personagem
+    }
   }
-}
 
-coletar_moeda(personagem, moeda) {
-  this.moedaSom.play()
-  moeda.disableBody(true, true)
-  this.game.socket.emit('artefatos-publicar', this.game.sala, {
-    moeda: this.moeda.map((moeda) => moeda.objeto.visible)
-  })
-}
-
-coletar_coração(personagem, coração) {
-  coração.disableBody(true, true)
-  if (coração.x === 4411.9) {
-    this.ambienteSom.stop()
-    this.morteSom.play()
-    this.morte.enableBody(true, 4600, 3550, true, true)
-    this.time.delayedCall(20000, () => {
-      this.morte.disableBody(true, true)
-      this.ambienteSom.play()
-    })
-  } else {
+  coletar_moeda (personagem, moeda) {
     this.moedaSom.play()
+    moeda.disableBody(true, true)
+    this.game.socket.emit('artefatos-publicar', this.game.sala, {
+      moeda: this.moeda.map((moeda) => moeda.objeto.visible)
+    })
   }
-  this.game.socket.emit('artefatos-publicar', this.game.sala, {
-    coração: this.coração.map((coração) => coração.objeto.visible)
-  })
-}
 
-morteMata(personagem, morte) {
-  this.scene.stop('princpal')
-  this.scene.start('final-triste')
-}
+  coletar_coração (personagem, coração) {
+    coração.disableBody(true, true)
+    if (coração.x === 4411.9) {
+      this.ambienteSom.stop()
+      this.morteSom.play()
+      this.morte.enableBody(true, 4600, 3550, true, true)
+      this.time.delayedCall(20000, () => {
+        this.morte.disableBody(true, true)
+        this.ambienteSom.play()
+      })
+    } else {
+      this.moedaSom.play()
+    }
+    this.game.socket.emit('artefatos-publicar', this.game.sala, {
+      coração: this.coração.map((coração) => coração.objeto.visible)
+    })
+  }
+
+  morteMata (personagem, morte) {
+    this.scene.stop('princpal')
+    this.scene.start('final-triste')
+  }
 }
