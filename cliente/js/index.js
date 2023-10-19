@@ -14,6 +14,9 @@ class Game extends Phaser.Game {
       console.log('Conectado ao servidor!')
     })
 
+    this.scoreMoeda = {
+      score: 0
+    }
     this.scene.add('cena0', cena0)
     this.scene.add('sala', sala)
     this.scene.add('principal', principal)

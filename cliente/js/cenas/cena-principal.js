@@ -393,6 +393,16 @@ export default class principal extends Phaser.Scene {
       coração.objeto.anims.play('coração-girando')
       this.physics.add.collider(this.personagem, coração.objeto, this.coletar_coração, null, this)
     })
+    // Score //
+
+    this.texto = this.add.text(20, 30, `moeda: ${this.game.scoreMigalha.score}`, {
+      fontFamily: 'Silkscreen',
+      fontSize: '25px',
+      stroke: '#000000',
+      strokeThickness: 4,
+      fill: '#ffffff'
+    })
+    this.texto.setScrollFactor(0)
 
     /* botões */
     this.esquerda = this.add.sprite(10, 350, 'esquerda')
@@ -576,6 +586,8 @@ export default class principal extends Phaser.Scene {
   coletar_moeda (personagem, moeda) {
     this.moedaSom.play()
     moeda.disableBody(true, true)
+    this.game.scoreMoeda.score++
+    this.texto.setText(`moeda: ${this.game.scoreMoeda.score}`)
     this.game.socket.emit('artefatos-publicar', this.game.sala, {
       moeda: this.moeda.map((moeda) => moeda.objeto.visible)
     })
