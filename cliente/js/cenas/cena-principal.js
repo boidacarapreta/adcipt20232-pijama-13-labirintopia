@@ -395,7 +395,16 @@ export default class principal extends Phaser.Scene {
     })
     // Score //
 
-    this.texto = this.add.text(20, 30, `moeda: ${this.game.scoreMigalha.score}`, {
+    this.texto = this.add.text(20, 30, `moeda: ${this.game.scoreMoeda.score}`, {
+      fontFamily: 'Silkscreen',
+      fontSize: '25px',
+      stroke: '#000000',
+      strokeThickness: 4,
+      fill: '#ffffff'
+    })
+    this.texto.setScrollFactor(0)
+
+    this.texto = this.add.text(20, 70, `coração: ${this.game.scoreCoração.score}`, {
       fontFamily: 'Silkscreen',
       fontSize: '25px',
       stroke: '#000000',
@@ -595,6 +604,8 @@ export default class principal extends Phaser.Scene {
 
   coletar_coração (personagem, coração) {
     coração.disableBody(true, true)
+    this.game.scoreCoração.score++
+    this.texto.setText(`coração: ${this.game.scoreCoração.score}`)
     if (coração.x === 4411.9) {
       this.ambienteSom.stop()
       this.morteSom.play()
@@ -613,6 +624,6 @@ export default class principal extends Phaser.Scene {
 
   morteMata (personagem, morte) {
     this.scene.stop('princpal')
-    this.scene.start('final-triste')
+    this.scene.start('finaltriste')
   }
 }
