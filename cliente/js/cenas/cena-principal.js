@@ -58,9 +58,18 @@ export default class principal extends Phaser.Scene {
       frameWidth: 128,
       frameHeight: 128
     })
+
     this.load.spritesheet('baixo', '../assets/botoes/baixo.png', {
       frameWidth: 128,
       frameHeight: 128
+    })
+    this.load.spritesheet('entrada1', '../assets/portaentrada.png', {
+      frameWidth: 64,
+      frameHeight: 84
+    })
+    this.load.spritesheet('entrada2', '../assets/portaentrada1.png', {
+      frameWidth: 64,
+      frameHeight: 84
     })
   }
 
@@ -98,17 +107,20 @@ export default class principal extends Phaser.Scene {
     this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede1, this.tilesetParedeHorizontal1, this.tilesetParedeVertical1, this.tilesetBaseQuina1, this.tilesetTopoDeQuina1])
     this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7, this.tilesetSombra8])
 
+    this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
+    this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
+
     /* personagens */
     if (this.game.jogadores.primeiro === this.game.socket.id) {
       this.local = 'íris'
       this.remoto = 'alatar'
-      this.personagem = this.physics.add.sprite(1520.6, 346.6, this.local, 0)
-      this.personagemRemoto = this.add.sprite(3136.6, 366.5, this.remoto, 0)
+      this.personagem = this.physics.add.sprite(1703, 345, this.local, 0)
+      this.personagemRemoto = this.add.sprite(2976, 345, this.remoto, 0)
     } else if (this.game.jogadores.segundo === this.game.socket.id) {
       this.local = 'alatar'
       this.remoto = 'íris'
-      this.personagem = this.physics.add.sprite(3136.6, 366.5, this.local, 0)
-      this.personagemRemoto = this.add.sprite(1520.6, 346.6, this.remoto, 0)
+      this.personagem = this.physics.add.sprite(2976, 345, this.local, 0)
+      this.personagemRemoto = this.add.sprite(1703, 345, this.remoto, 0)
     } else { //
     }
 
