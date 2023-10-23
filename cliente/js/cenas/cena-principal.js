@@ -407,23 +407,21 @@ export default class principal extends Phaser.Scene {
     })
     // Score //
 
-    this.texto = this.add.text(20, 30, `moeda: ${this.game.scoreMoeda.score}`, {
+    this.textoMoeda = this.add.text(20, 30, `moeda: ${this.game.scoreMoeda.score}`, {
       fontFamily: 'Silkscreen',
       fontSize: '25px',
       stroke: '#000000',
       strokeThickness: 4,
       fill: '#ffffff'
-    })
-    this.texto.setScrollFactor(0)
+    }).setScrollFactor(0)
 
-    this.texto = this.add.text(20, 70, `coração: ${this.game.scoreCoração.score}`, {
+    this.textoCoração = this.add.text(20, 70, `coração: ${this.game.scoreCoração.score}`, {
       fontFamily: 'Silkscreen',
       fontSize: '25px',
       stroke: '#000000',
       strokeThickness: 4,
       fill: '#ffffff'
-    })
-    this.texto.setScrollFactor(0)
+    }).setScrollFactor(0)
 
     /* botões */
     this.esquerda = this.add.sprite(10, 350, 'esquerda')
@@ -546,14 +544,14 @@ export default class principal extends Phaser.Scene {
 
     if (this.vida > 0 && this.morte.visible) {
       /* morte segue personagem mais próximo */
-      const hipotenusa_personagem = Phaser.Math.Distance.Between(
+      const hipotenusaPersonagem = Phaser.Math.Distance.Between(
         this.personagem.x,
         this.morte.x,
         this.personagem.y,
         this.morte.y
       )
 
-      const hipotenusa_personagemRemoto = Phaser.Math.Distance.Between(
+      const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
         this.personagemRemoto.x,
         this.morte.x,
         this.personagemRemoto.y,
@@ -562,7 +560,7 @@ export default class principal extends Phaser.Scene {
 
       /* Por padrão, o primeiro jogador é o alvo */
       let alvo = this.personagem
-      if (hipotenusa_personagem > hipotenusa_personagemRemoto) {
+      if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
         /* Jogador 2 é perseguido pelo morte */
         alvo = this.personagemRemoto
       }
@@ -608,7 +606,7 @@ export default class principal extends Phaser.Scene {
     this.moedaSom.play()
     moeda.disableBody(true, true)
     this.game.scoreMoeda.score++
-    this.texto.setText(`moeda: ${this.game.scoreMoeda.score}`)
+    this.textoMoeda.setText(`moeda: ${this.game.scoreMoeda.score}`)
     this.game.socket.emit('artefatos-publicar', this.game.sala, {
       moeda: this.moeda.map((moeda) => moeda.objeto.visible)
     })
@@ -617,7 +615,7 @@ export default class principal extends Phaser.Scene {
   coletar_coração (personagem, coração) {
     coração.disableBody(true, true)
     this.game.scoreCoração.score++
-    this.texto.setText(`coração: ${this.game.scoreCoração.score}`)
+    this.textoCoração.setText(`coração: ${this.game.scoreCoração.score}`)
     if (coração.x === 4411.9) {
       this.ambienteSom.stop()
       this.morteSom.play()

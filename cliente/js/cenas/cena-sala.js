@@ -4,7 +4,7 @@ export default class sala extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('salas', './assets/salas.png')
+    this.load.image('sala', './assets/salas.png')
     this.load.image('vazio', '../assets/botoes/vazio.png')
     this.load.spritesheet('telacheia', '../assets/botoes/telacheia.png', {
       frameWidth: 64,
@@ -27,7 +27,7 @@ export default class sala extends Phaser.Scene {
       })
       .setScrollFactor(0, 0)
 
-    this.imagem = this.add.image(400, 225, 'salas').setTint(0xcccccc)
+    this.imagem = this.add.image(400, 225, 'sala').setTint(0xcccccc)
 
     this.salas = [
 
@@ -98,20 +98,31 @@ export default class sala extends Phaser.Scene {
         .sprite(sala.x, sala.y, 'vazio')
         .setInteractive()
         .on('pointerdown', () => {
-          this.game.socket.on('jogadores', (jogadores) => {
-            this.game.jogadores = jogadores
-            console.log(jogadores)
-            this.game.scene.stop('sala')
-            this.game.scene.start('principal')
+          this.salas.forEach((item) => {
+            item.botao.destroy()
           })
-          this.game.socket.emit('entrar-na-sala', sala.numero)
           this.game.sala = sala.numero
-          this.aguarde = this.add
-            .text(this.game.config.width / 2,
-              this.game.config.heigth / 2,
-              'Conectando...'
-            )
+          this.game.socket.emit('entrar-na-sala', this.game.sala)
         })
+    })
+
+    this.game.socket.on('jogadores', (jogadores) => {
+      this.game.jogadores = jogadores
+      console.log(jogadores)
+      if (jogadores.segundo) {
+        // this.mensagem.setText('Conectando...')
+        this.game.jogadores = jogadores
+        this.game.scene.stop('sala')
+        this.game.scene.start('principal')
+      } else if (jogadores.primeiro) {
+        // this.mensagem.setText('Aguardando segundo jogador...')
+        navigator.mediaDevices
+          .getUserMedia({ video: false, audio: true })
+          .then((stream) => {
+            this.game.midias = stream
+          })
+          .catch((error) => console.error(error))
+      }
     })
   }
 }
