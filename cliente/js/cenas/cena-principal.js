@@ -71,6 +71,10 @@ export default class principal extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 84
     })
+    this.load.spritesheet('portao', '../assets/portao.png', {
+      frameWidth: 192,
+      frameHeight: 128
+    })
   }
 
   create () {
@@ -109,6 +113,7 @@ export default class principal extends Phaser.Scene {
 
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
+    this.portao = this.physics.add.sprite(2338, 1340, 'portao')
 
     /* personagens */
     if (this.game.jogadores.primeiro === this.game.socket.id) {
@@ -568,9 +573,9 @@ export default class principal extends Phaser.Scene {
       /* Sentido no eixo X */
       const diffX = alvo.x - this.morte.x
       if (diffX >= 10) {
-        this.morte.setVelocityX(80)
+        this.morte.setVelocityX(this.velocidade * 0.5)
       } else if (diffX <= 10) {
-        this.morte.setVelocityX(-80)
+        this.morte.setVelocityX(-this.velocidade * 0.5)
       }
 
       /* Sentido no eixo Y */
