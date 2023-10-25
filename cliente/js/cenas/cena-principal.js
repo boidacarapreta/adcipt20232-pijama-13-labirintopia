@@ -71,7 +71,7 @@ export default class principal extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 84
     })
-    this.load.spritesheet('portao', '../assets/portao2.png', {
+    this.load.spritesheet('portao', '../assets/portao.png', {
       frameWidth: 192,
       frameHeight: 128
     })
@@ -113,7 +113,26 @@ export default class principal extends Phaser.Scene {
 
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
-    this.portao = this.physics.add.sprite(2338, 1340, 'portao')
+
+    this.portao = this.add.sprite(2338, 1340, 'portao')
+    this.anims.create({
+      key: 'portao-parado',
+      frames: this.anims.generateFrameNumbers(this.portao, {
+        start: 0,
+        end: 0
+      }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'portao-descendo',
+      frames: this.anims.generateFrameNumbers(this.portao, {
+        start: 1,
+        end: 20
+      }),
+      frameRate: 10,
+      repeat: -1
+    })
 
     /* personagens */
     if (this.game.jogadores.primeiro === this.game.socket.id) {
