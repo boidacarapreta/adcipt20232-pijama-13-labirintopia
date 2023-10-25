@@ -71,7 +71,7 @@ export default class principal extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 84
     })
-    this.load.spritesheet('portao', '../assets/portao.png', {
+    this.load.spritesheet('portao', '../assets/portao2.png', {
       frameWidth: 192,
       frameHeight: 128
     })
