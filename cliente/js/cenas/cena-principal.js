@@ -111,6 +111,8 @@ export default class principal extends Phaser.Scene {
     this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede1, this.tilesetParedeHorizontal1, this.tilesetParedeVertical1, this.tilesetBaseQuina1, this.tilesetTopoDeQuina1])
     this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7, this.tilesetSombra8])
 
+    /* portas */
+
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
 
@@ -145,10 +147,58 @@ export default class principal extends Phaser.Scene {
       this.remoto = 'íris'
       this.personagem = this.physics.add.sprite(2976, 345, this.local, 0)
       this.personagemRemoto = this.add.sprite(1703, 345, this.remoto, 0)
-    } else { //
+
+      navigator.mediaDevices.getUserMedia({ video: false, audio: true })
+        .then((stream) => {
+          this.game.localConnection = new RTCPeerConnection(this.game.ice_servers)
+
+          this.game.localConnection.onicecandidate = ({ candidate }) =>
+            candidate && this.game.socket.emit('candidate', this.game.sala, candidate)
+
+          this.game.localConnection.ontrack = ({ streams: [stream] }) =>
+            this.game.audio.srcObject = stream
+
+          stream.getTracks()
+            .forEach((track) => this.game.localConnection.addTrack(track, stream))
+
+          this.game.localConnection.createOffer()
+            .then((offer) => this.game.localConnection.setLocalDescription(offer))
+            .then(() => this.game.socket.emit('offer', this.game.sala, this.game.localConnection.localDescription))
+
+          this.game.midias = stream
+        })
+        .catch((error) => console.error(error))
     }
 
+    this.game.socket.on('offer', (description) => {
+      this.game.remoteConnection = new RTCPeerConnection(this.game.ice_servers)
+
+      this.game.remoteConnection.onicecandidate = ({ candidate }) =>
+        candidate && this.game.socket.emit('candidate', this.game.sala, candidate)
+
+      this.game.remoteConnection.ontrack = ({ streams: [midia] }) =>
+        this.game.audio.srcObject = midia
+
+      this.game.midias.getTracks()
+        .forEach((track) => this.game.remoteConnection.addTrack(track, this.game.midias))
+
+      this.game.remoteConnection.setRemoteDescription(description)
+        .then(() => this.game.remoteConnection.createAnswer())
+        .then((answer) => this.game.remoteConnection.setLocalDescription(answer))
+        .then(() => this.game.socket.emit('answer', this.game.sala, this.game.remoteConnection.localDescription))
+    })
+
+    this.game.socket.on('answer', (description) =>
+      this.game.localConnection.setRemoteDescription(description)
+    )
+
+    this.game.socket.on('candidate', (candidate) => {
+      const conn = this.game.localConnection || this.game.remoteConnection
+      conn.addIceCandidate(new RTCIceCandidate(candidate))
+    })
+
     /* morte */
+
     this.morte = this.physics.add.sprite(4413, 3523, 'morte')
     this.morte.disableBody(true, true)
     this.physics.add.collider(this.personagem, this.morte, this.morteMata, null, this)
