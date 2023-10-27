@@ -5,10 +5,14 @@ import cena0 from './cenas/cena0.js'
 import sala from './cenas/cena-sala.js'
 import principal from './cenas/cena-principal.js'
 import finaltriste from './cenas/cena-game-over.js'
+import finalfeliz from './cenas/cena-final-feliz.js'
 
 class Game extends Phaser.Game {
   constructor () {
     super(config)
+
+    this.id = 1 // Labirintopia, id 1
+    this.valor = 100 // crédito padrão em Tijolinhos quando termina o jogo
 
     let iceServers
     if (window.location.host === 'feira-de-jogos.sj.ifsc.edu.br') {
@@ -48,7 +52,7 @@ class Game extends Phaser.Game {
     this.scene.add('sala', sala)
     this.scene.add('principal', principal)
     this.scene.add('final-triste', finaltriste)
-
+    this.scene.add('finalfeliz', finalfeliz)
     this.scene.start('cena0')
   }
 }

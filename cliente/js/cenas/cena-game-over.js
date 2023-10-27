@@ -1,4 +1,4 @@
-export default class principal extends Phaser.Scene {
+export default class finaltriste extends Phaser.Scene {
   constructor () {
     super('finaltriste')
   }

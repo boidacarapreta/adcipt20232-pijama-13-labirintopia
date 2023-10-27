@@ -117,6 +117,9 @@ export default class principal extends Phaser.Scene {
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
 
     this.portao = this.add.sprite(2338, 1340, 'portao')
+    // this.portao.objeto.anims.play('portao-descendo')
+    this.physics.add.collider(this.personagem, this.portao, this.portao_descendo, null, this)
+
     this.anims.create({
       key: 'portao-parado',
       frames: this.anims.generateFrameNumbers(this.portao, {
@@ -709,5 +712,9 @@ export default class principal extends Phaser.Scene {
   morteMata (personagem, morte) {
     this.scene.stop('princpal')
     this.scene.start('finaltriste')
+  }
+
+  portao_descendo (personagem, portao) {
+    portao
   }
 }
