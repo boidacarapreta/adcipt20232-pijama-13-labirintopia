@@ -116,27 +116,18 @@ export default class principal extends Phaser.Scene {
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
 
-    this.portao = this.add.sprite(2338, 1340, 'portao')
+    this.portao = this.physics.add.sprite(2338, 1340, 'portao', 0)
+      .setImmovable(true)
+
     // this.portao.objeto.anims.play('portao-descendo')
-    this.physics.add.collider(this.personagem, this.portao, this.portao_descendo, null, this)
 
     this.anims.create({
-      key: 'portao-parado',
-      frames: this.anims.generateFrameNumbers(this.portao, {
-        start: 0,
-        end: 0
-      }),
-      frameRate: 10,
-      repeat: -1
-    })
-    this.anims.create({
       key: 'portao-descendo',
-      frames: this.anims.generateFrameNumbers(this.portao, {
-        start: 1,
+      frames: this.anims.generateFrameNumbers('portao', {
+        start: 0,
         end: 20
       }),
-      frameRate: 10,
-      repeat: -1
+      frameRate: 10
     })
 
     /* personagens */
@@ -580,10 +571,11 @@ export default class principal extends Phaser.Scene {
     this.layerParede.setCollisionByProperty({ collides: true })
     this.layerSombra.setCollisionByProperty({ collides: true })
 
+    this.personagem_colide_portao = this.physics.add.collider(this.personagem, this.portao, this.portao_descendo, null, this)
     this.physics.add.collider(this.personagem, this.layerParede)
     this.physics.add.collider(this.personagem, this.layerSombra)
 
-    this.game.socket.on('estado-notificar', ({ cena, x, y, frame }) => {
+    this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
       this.personagemRemoto.y = y
       this.personagemRemoto.setFrame(frame)
@@ -591,10 +583,13 @@ export default class principal extends Phaser.Scene {
 
     this.game.socket.on('artefatos-notificar', (artefatos) => {
       if (artefatos.moeda) {
+        this.game.scoreMoeda.score = 0
         for (let i = 0; i < artefatos.moeda.length; i++) {
           if (!artefatos.moeda[i]) {
             this.moeda[i].objeto.disableBody(true, true)
+            this.game.scoreMoeda.score++
           }
+          this.textoMoeda.setText(`moeda: ${this.game.scoreMoeda.score}`)
         }
       }
       if (artefatos.coração) {
@@ -610,72 +605,68 @@ export default class principal extends Phaser.Scene {
   update () {
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
-        cena: 'principal',
         x: this.personagem.x,
         y: this.personagem.y,
         frame: this.personagem.frame.name
       })
+      if (this.vida > 0 && this.morte.visible) {
+        /* morte segue personagem mais próximo */
+        const hipotenusaPersonagem = Phaser.Math.Distance.Between(
+          this.personagem.x,
+          this.morte.x,
+          this.personagem.y,
+          this.morte.y
+        )
+
+        const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
+          this.personagemRemoto.x,
+          this.morte.x,
+          this.personagemRemoto.y,
+          this.morte.y
+        )
+
+        /* Por padrão, o primeiro jogador é o alvo */
+        let alvo = this.personagem
+        if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
+          /* Jogador 2 é perseguido pelo morte */
+          alvo = this.personagemRemoto
+        }
+
+        /* Sentido no eixo X */
+        const diffX = alvo.x - this.morte.x
+        if (diffX >= 10) {
+          this.morte.setVelocityX(this.velocidade * 0.5)
+        } else if (diffX <= 10) {
+          this.morte.setVelocityX(-this.velocidade * 0.5)
+        }
+
+        /* Sentido no eixo Y */
+        const diffY = alvo.y - this.morte.y
+        if (diffY >= 10) {
+          this.morte.setVelocityY(100)
+        } else if (diffY <= 10) {
+          this.morte.setVelocityY(-100)
+        }
+
+        /* Animação */
+        try {
+          if (diffX > 0) {
+            this.morte.anims.play('morte-direita', true)
+          } else if (diffX < 0) {
+            this.morte.anims.play('morte-esquerda', true)
+          } else if (diffY > 0) {
+            this.morte.anims.play('morte-baixo', true)
+          } else if (diffY < 0) {
+            this.morte.anims.play('morte-cima', true)
+          } else {
+            this.morte.anims.play('morte')
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      }
     } catch (error) {
       console.error(error)
-    }
-
-    if (this.vida > 0 && this.morte.visible) {
-      /* morte segue personagem mais próximo */
-      const hipotenusaPersonagem = Phaser.Math.Distance.Between(
-        this.personagem.x,
-        this.morte.x,
-        this.personagem.y,
-        this.morte.y
-      )
-
-      const hipotenusaPersonagemRemoto = Phaser.Math.Distance.Between(
-        this.personagemRemoto.x,
-        this.morte.x,
-        this.personagemRemoto.y,
-        this.morte.y
-      )
-
-      /* Por padrão, o primeiro jogador é o alvo */
-      let alvo = this.personagem
-      if (hipotenusaPersonagem > hipotenusaPersonagemRemoto) {
-        /* Jogador 2 é perseguido pelo morte */
-        alvo = this.personagemRemoto
-      }
-
-      /* Sentido no eixo X */
-      const diffX = alvo.x - this.morte.x
-      if (diffX >= 10) {
-        this.morte.setVelocityX(this.velocidade * 0.5)
-      } else if (diffX <= 10) {
-        this.morte.setVelocityX(-this.velocidade * 0.5)
-      }
-
-      /* Sentido no eixo Y */
-      const diffY = alvo.y - this.morte.y
-      if (diffY >= 10) {
-        this.morte.setVelocityY(100)
-      } else if (diffY <= 10) {
-        this.morte.setVelocityY(-100)
-      }
-
-      /* Animação */
-      try {
-        if (diffX > 0) {
-          this.morte.anims.play('morte-direita', true)
-        } else if (diffX < 0) {
-          this.morte.anims.play('morte-esquerda', true)
-        } else if (diffY > 0) {
-          this.morte.anims.play('morte-baixo', true)
-        } else if (diffY < 0) {
-          this.morte.anims.play('morte-cima', true)
-        } else {
-          this.morte.anims.play('morte')
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    } else {
-      // morte pegou o personagem
     }
   }
 
@@ -715,6 +706,21 @@ export default class principal extends Phaser.Scene {
   }
 
   portao_descendo (personagem, portao) {
-    portao
+    if (this.game.scoreMoeda.score === this.moeda.length) {
+      this.portao.anims.play('portao-descendo')
+      this.tempo = 2
+      this.relogio = this.time.addEvent({
+        delay: 1000,
+        callback: () => {
+          this.tempo--
+          if (this.tempo === 0) {
+            this.relogio.destroy()
+            this.portao.disableBody(true, true)
+          }
+        },
+        callbackScope: this,
+        loop: true
+      })
+    }
   }
 }
