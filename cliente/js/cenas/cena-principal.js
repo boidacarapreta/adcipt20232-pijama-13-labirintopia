@@ -75,6 +75,10 @@ export default class principal extends Phaser.Scene {
       frameWidth: 192,
       frameHeight: 128
     })
+    this.load.spritesheet('portao2', '../assets/portao2.png', {
+      frameWidth: 192,
+      frameHeight: 128
+    })
   }
 
   create () {
@@ -116,6 +120,8 @@ export default class principal extends Phaser.Scene {
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
 
+    this.portao2 = this.physics.add.sprite(3670, 5189, 'portao2', 0)
+      .setImmovable(true)
     this.portao = this.physics.add.sprite(2338, 1340, 'portao', 0)
       .setImmovable(true)
 
@@ -574,6 +580,7 @@ export default class principal extends Phaser.Scene {
     this.personagem_colide_portao = this.physics.add.collider(this.personagem, this.portao, this.portao_descendo, null, this)
     this.physics.add.collider(this.personagem, this.layerParede)
     this.physics.add.collider(this.personagem, this.layerSombra)
+    this.physics.add.collider(this.personagem, this.portao2)
 
     this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
