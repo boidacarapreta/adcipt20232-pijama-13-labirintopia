@@ -164,13 +164,13 @@ export default class alfabeto extends Phaser.Scene {
     ]
 
     // Adição dos botao e configuração da interatividade.
-    this.verificacao4 = 'V'
+    this.verificacao10 = 'V'
 
     this.botao.forEach((item, index) => {
       item.botao = this.add.image(item.x, item.y, 'botao')
         .setInteractive()
         .on('pointerdown', () => {
-          if (this.game.verifica_enigmaf_m === 'F') {
+          if (this.game.verifica_alfabeto === 'F') {
             this.alfabeto[index].objeto.setFrame(this.alfabeto[index].objeto.frame.name + 1)
             console.log(this.botao[index].numero)
             console.log(this.alfabeto[index].objeto.frame.name)
@@ -213,7 +213,7 @@ export default class alfabeto extends Phaser.Scene {
               }
             }
             if (this.botao[index].numero === '5') {
-              if (this.alfabeto[index].objeto.frame.name === 10) {
+              if (this.alfabeto[index].objeto.frame.name === 11) {
                 console.log('deu certo')
                 this.verificacao5 = 'V'
               } else {
@@ -276,7 +276,7 @@ export default class alfabeto extends Phaser.Scene {
               }
             }
             if (this.botao[index].numero === '11') {
-              if (this.alfabeto[index].objeto.frame.name === 4 || this.alfabeto[index].objeto.frame.name === null) {
+              if (this.alfabeto[index].objeto.frame.name === 4) {
                 console.log('deu certo')
                 this.verificacao12 = 'V'
               } else {
@@ -289,7 +289,6 @@ export default class alfabeto extends Phaser.Scene {
             if (this.verificacao1 === 'V' && this.verificacao2 === 'V' && this.verificacao3 === 'V' && this.verificacao4 === 'V' && this.verificacao5 === 'V' && this.verificacao6 === 'V' && this.verificacao7 === 'V' && this.verificacao8 === 'V' && this.verificacao9 === 'V' && this.verificacao10 === 'V' && this.verificacao11 === 'V' && this.verificacao12 === 'V') {
               console.log('foi meu')
               // Ilumina letras
-              this.cliqueporta.play()
               this.add.image(173, 230, 'c')
               this.add.image(325, 230, 'u')
               this.add.image(476, 230, 'm')
@@ -302,10 +301,12 @@ export default class alfabeto extends Phaser.Scene {
               this.add.image(325, 230, 'a')
               this.add.image(476, 230, 'd')
               this.add.image(622, 230, 'd')
-              this.game.verifica_enigmaf_m = 'V'
+              this.game.verifica_alfabeto = 'V'
               this.alfabeto.forEach((index) => {
                 this.alfabeto[index].objeto.setVisible(false)
               })
+            } else {
+              this.game.verifica_alfabeto = 'F'
             }
           }
         })

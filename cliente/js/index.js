@@ -56,6 +56,7 @@ class Game extends Phaser.Game {
     this.scene.add('final-triste', finaltriste)
     this.scene.add('finalfeliz', finalfeliz)
     this.scene.start('cena0')
+    this.verifica_alfabeto = 'F'
   }
 }
 
