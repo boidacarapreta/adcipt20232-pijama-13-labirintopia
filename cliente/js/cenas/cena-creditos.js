@@ -1,15 +1,17 @@
 export default class finalfeliz extends Phaser.Scene {
   constructor () {
-    super('finalfeliz')
+    super('creditos')
   }
 
   preload () {
     this.load.audio('clique', './assets/clique.mp3')
     this.load.audio('credito', './assets/credito.mp3')
     this.load.audio('erro', './assets/erro.mp3')
+    this.load.image('fundo', './assets/fundo.png')
   }
 
   create () {
+    this.imagem = this.add.image(400, 225, 'fundo')
     this.clique = this.sound.add('clique')
     this.credito = this.sound.add('credito')
     this.erro = this.sound.add('erro')

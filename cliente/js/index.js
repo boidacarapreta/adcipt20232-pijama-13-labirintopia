@@ -6,7 +6,8 @@ import sala from './cenas/cena-sala.js'
 import principal from './cenas/cena-principal.js'
 import alfabeto from './cenas/cena-alfabeto.js'
 import finaltriste from './cenas/cena-game-over.js'
-import finalfeliz from './cenas/cena-final-feliz.js'
+// import finalfeliz from './cenas/cena-final-feliz.js'
+import creditos from './cenas/cena-creditos.js'
 
 class Game extends Phaser.Game {
   constructor () {
@@ -54,7 +55,8 @@ class Game extends Phaser.Game {
     this.scene.add('principal', principal)
     this.scene.add('alfabeto', alfabeto)
     this.scene.add('final-triste', finaltriste)
-    this.scene.add('finalfeliz', finalfeliz)
+    this.scene.add('creditos', creditos)
+    // this.scene.add('finalfeliz', finalfeliz)
     this.scene.start('cena0')
     this.verifica_alfabeto = 'F'
   }
