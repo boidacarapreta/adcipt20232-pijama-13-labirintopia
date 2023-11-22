@@ -18,7 +18,7 @@ export default class cena0 extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('cena0')
-        this.game.scene.start('creditos')
+        this.game.scene.start('finalfeliz')
       })
 
     this.telacheia = this.add

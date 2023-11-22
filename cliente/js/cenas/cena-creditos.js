@@ -103,8 +103,8 @@ export default class finalfeliz extends Phaser.Scene {
                           this.tempo--
                           if (this.tempo === 0) {
                             this.relogio.destroy()
-                            this.scene.stop('final-feliz')
-                            this.scene.start('abertura')
+                            this.scene.stop('creditos')
+                            this.scene.start('finalfeliz')
                           }
                         },
                         callbackScope: this,
