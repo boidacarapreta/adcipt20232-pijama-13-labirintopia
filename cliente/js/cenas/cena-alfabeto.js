@@ -275,7 +275,7 @@ export default class alfabeto extends Phaser.Scene {
                 this.verificacao11 = 'F'
               }
             }
-            if (this.botao[index].numero === '11') {
+            if (this.botao[index].numero === '12') {
               if (this.alfabeto[index].objeto.frame.name === 4) {
                 console.log('deu certo')
                 this.verificacao12 = 'V'
@@ -289,18 +289,18 @@ export default class alfabeto extends Phaser.Scene {
             if (this.verificacao1 === 'V' && this.verificacao2 === 'V' && this.verificacao3 === 'V' && this.verificacao4 === 'V' && this.verificacao5 === 'V' && this.verificacao6 === 'V' && this.verificacao7 === 'V' && this.verificacao8 === 'V' && this.verificacao9 === 'V' && this.verificacao10 === 'V' && this.verificacao11 === 'V' && this.verificacao12 === 'V') {
               console.log('foi meu')
               // Ilumina letras
-              this.add.image(173, 230, 'c')
-              this.add.image(325, 230, 'u')
-              this.add.image(476, 230, 'm')
-              this.add.image(622, 230, 'p')
-              this.add.image(173, 230, 'l')
-              this.add.image(325, 230, 'i')
-              this.add.image(476, 230, 'c')
-              this.add.image(622, 230, 'i')
-              this.add.image(173, 230, 'd')
-              this.add.image(325, 230, 'a')
-              this.add.image(476, 230, 'd')
-              this.add.image(622, 230, 'd')
+              this.add.image(105.9, 230, 'c')
+              this.add.image(157.9, 230, 'u')
+              this.add.image(210, 230, 'm')
+              this.add.image(263.9, 230, 'p')
+              this.add.image(314, 230, 'l')
+              this.add.image(369, 230, 'i')
+              this.add.image(420, 230, 'c')
+              this.add.image(472.9, 230, 'i')
+              this.add.image(525, 230, 'd')
+              this.add.image(576, 230, 'a')
+              this.add.image(630, 230, 'd')
+              this.add.image(685, 230, 'e')
               this.game.verifica_alfabeto = 'V'
               this.alfabeto.forEach((index) => {
                 this.alfabeto[index].objeto.setVisible(false)

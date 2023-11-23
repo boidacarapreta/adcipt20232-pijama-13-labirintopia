@@ -580,7 +580,8 @@ export default class principal extends Phaser.Scene {
     this.personagem_colide_portao = this.physics.add.collider(this.personagem, this.portao, this.portao_descendo, null, this)
     this.physics.add.collider(this.personagem, this.layerParede)
     this.physics.add.collider(this.personagem, this.layerSombra)
-    this.physics.add.collider(this.personagem, this.portao2)
+    this.physics.add.collider(this.personagem, this.portao2, this.portaofinal, null, this)
+
 
     this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
@@ -708,8 +709,13 @@ export default class principal extends Phaser.Scene {
   }
 
   morteMata (personagem, morte) {
-    this.scene.stop('princpal')
+    this.scene.stop('principal')
     this.scene.start('finaltriste')
+  }
+
+  portaofinal (personagem, portao2) {
+    this.scene.stop('principal')
+    this.scene.start('creditos')
   }
 
   portao_descendo (personagem, portao) {
