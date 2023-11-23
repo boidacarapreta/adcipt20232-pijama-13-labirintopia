@@ -115,6 +115,12 @@ export default class principal extends Phaser.Scene {
     this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede1, this.tilesetParedeHorizontal1, this.tilesetParedeVertical1, this.tilesetBaseQuina1, this.tilesetTopoDeQuina1])
     this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7, this.tilesetSombra8])
 
+    /* temporizador */
+
+    this.tempoLimite = 600 // 10 minutos em segundos
+    this.tempoRestante = this.tempoLimite
+    this.exibirTemporizador()
+
     /* portas */
 
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
@@ -582,7 +588,6 @@ export default class principal extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerSombra)
     this.physics.add.collider(this.personagem, this.portao2, this.portaofinal, null, this)
 
-
     this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
       this.personagemRemoto.y = y
@@ -611,6 +616,8 @@ export default class principal extends Phaser.Scene {
   }
 
   update () {
+    this.atualizarTemporizador()
+
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
         x: this.personagem.x,
@@ -716,6 +723,29 @@ export default class principal extends Phaser.Scene {
   portaofinal (personagem, portao2) {
     this.scene.stop('principal')
     this.scene.start('creditos')
+  }
+
+  exibirTemporizador () {
+    this.temporizadorTexto = this.add.text(600, 30, '', {
+      fontFamily: 'Arial',
+      fontSize: '20px',
+      color: '#ffffff'
+    }).setScrollFactor(0)
+
+    this.atualizarTemporizador()
+  }
+
+  atualizarTemporizador () {
+    const minutos = Math.floor(this.tempoRestante / 60)
+    const segundos = this.tempoRestante % 60
+
+    this.temporizadorTexto.setText(`Tempo: ${minutos}:${segundos}`)
+
+    if (this.tempoRestante > 0) {
+      this.tempoRestante--
+    } else {
+      this.finalizarJogo() // Adicione uma função para finalizar o jogo quando o tempo acabar
+    }
   }
 
   portao_descendo (personagem, portao) {
