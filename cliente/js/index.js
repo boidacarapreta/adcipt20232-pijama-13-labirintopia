@@ -54,9 +54,30 @@ class Game extends Phaser.Game {
     this.scene.add('sala', sala)
     this.scene.add('principal', principal)
     this.scene.add('alfabeto', alfabeto)
-    this.scene.add('final-triste', finaltriste)
+    this.scene.add('finaltriste', finaltriste)
     this.scene.add('creditos', creditos)
     this.scene.add('finalfeliz', finalfeliz)
+
+    this.data = new Date('2024-10-01T00:10:00.000')
+    this.data_formatada = ''
+    setInterval(() => {
+      this.data = new Date(this.data.getTime() - 1000) // Incrementa em 1 segundo o relógio
+      this.data_formatada =
+        (this.data.getMinutes() < 10 ? '0' : '') + // Adiciona 0 quando necessário
+        this.data.getMinutes() +
+        ':' +
+        (this.data.getSeconds() < 10 ? '0' : '') + // Adiciona 0 quando necessário
+        this.data.getSeconds()
+
+      /* Verifica se já chegou a meia noite */
+      // this.fimDoJogo = new Date("2024-01-01T00:00:00.000");
+      this.fimDoJogo = new Date('2024-01-01T00:00:00.000')
+      if (this.data.getTime() === this.fimDoJogo.getTime()) {
+        this.scene.stop('principal')
+        this.scene.start('finaltriste')
+      }
+    }, 1000)
+
     this.scene.start('cena0')
     this.verifica_alfabeto = 'F'
   }
