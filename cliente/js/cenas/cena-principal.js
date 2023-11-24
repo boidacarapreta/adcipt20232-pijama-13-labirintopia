@@ -744,7 +744,8 @@ export default class principal extends Phaser.Scene {
     if (this.tempoRestante > 0) {
       this.tempoRestante--
     } else {
-      this.finalizarJogo() // Adicione uma função para finalizar o jogo quando o tempo acabar
+      this.game.scene.stop('principal')
+      this.game.scene.start('finaltriste')
     }
   }
 
