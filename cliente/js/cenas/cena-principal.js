@@ -79,6 +79,14 @@ export default class principal extends Phaser.Scene {
       frameWidth: 192,
       frameHeight: 128
     })
+    this.load.spritesheet('portao3', '../assets/portao3.png', {
+      frameWidth: 192,
+      frameHeight: 128
+    })
+    this.load.spritesheet('portao4', '../assets/portao4.png', {
+      frameWidth: 192,
+      frameHeight: 128
+    })
   }
 
   create () {
@@ -119,6 +127,12 @@ export default class principal extends Phaser.Scene {
 
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
+
+    this.portao3 = this.physics.add.sprite(1825, 1025, 'portao3', 0)
+      .setImmovable(true)
+
+    this.portao4 = this.physics.add.sprite(2848, 1025, 'portao4', 0)
+      .setImmovable(true)
 
     this.portao2 = this.physics.add.sprite(3670, 5189, 'portao2', 0)
       .setImmovable(true)
@@ -380,11 +394,11 @@ export default class principal extends Phaser.Scene {
       },
       {
         x: 1825,
-        y: 1014
+        y: 904
       },
       {
         x: 2808,
-        y: 1014
+        y: 904
       },
       {
         x: 3062,
