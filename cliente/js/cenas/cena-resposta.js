@@ -17,7 +17,7 @@ export default class resposta extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('resposta')
-        this.game.scene.start('principal')
+        this.game.scene.resume('principal')
       })
   }
 

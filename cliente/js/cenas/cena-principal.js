@@ -741,15 +741,15 @@ export default class principal extends Phaser.Scene {
   portaofinal (personagem, portao2) {
     this.scene.stop('principal')
     this.scene.start('creditos')
-  }
+  };
 
   portaoalfabeto (personagem, portao3) {
-    this.scene.stop('principal')
+    this.scene.pause('principal')
     this.scene.start('alfabeto')
   }
 
   portaoresposta (personagem, portao4) {
-    this.scene.stop('principal')
+    this.scene.pause('principal')
     this.scene.start('resposta')
   }
 

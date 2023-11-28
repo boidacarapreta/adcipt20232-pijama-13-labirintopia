@@ -96,8 +96,7 @@ export default class alfabeto extends Phaser.Scene {
 
     this.alfabeto.forEach((item) => {
       item.objeto = this.add.sprite(item.x, item.y, 'alfabeto')
-    }
-    )
+    })
 
     this.botao = [
       {
