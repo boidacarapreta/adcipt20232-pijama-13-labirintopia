@@ -79,6 +79,14 @@ export default class principal extends Phaser.Scene {
       frameWidth: 192,
       frameHeight: 128
     })
+    this.load.spritesheet('portao3', '../assets/portao3.png', {
+      frameWidth: 192,
+      frameHeight: 128
+    })
+    this.load.spritesheet('portao4', '../assets/portao4.png', {
+      frameWidth: 192,
+      frameHeight: 128
+    })
   }
 
   create () {
@@ -115,16 +123,16 @@ export default class principal extends Phaser.Scene {
     this.layerParede = this.tilemapLabirinto.createLayer('parede', [this.tilesetBaseParede1, this.tilesetParedeHorizontal1, this.tilesetParedeVertical1, this.tilesetBaseQuina1, this.tilesetTopoDeQuina1])
     this.layerSombra = this.tilemapLabirinto.createLayer('sombra', [this.tilesetSombra1, this.tilesetSombra2, this.tilesetSombra3, this.tilesetSombra4, this.tilesetSombra5, this.tilesetSombra6, this.tilesetSombra7, this.tilesetSombra8])
 
-    /* temporizador */
-
-    this.tempoLimite = 600 // 10 minutos em segundos
-    this.tempoRestante = this.tempoLimite
-    this.exibirTemporizador()
-
     /* portas */
 
     this.entrada1 = this.add.sprite(1633, 288, 'entrada1')
     this.entrada2 = this.add.sprite(3036, 288, 'entrada2')
+
+    this.portao3 = this.physics.add.sprite(1825, 1025, 'portao3', 0)
+      .setImmovable(true)
+
+    this.portao4 = this.physics.add.sprite(2848, 1025, 'portao4', 0)
+      .setImmovable(true)
 
     this.portao2 = this.physics.add.sprite(3670, 5189, 'portao2', 0)
       .setImmovable(true)
@@ -386,11 +394,11 @@ export default class principal extends Phaser.Scene {
       },
       {
         x: 1825,
-        y: 1014
+        y: 904
       },
       {
         x: 2808,
-        y: 1014
+        y: 904
       },
       {
         x: 3062,
@@ -587,6 +595,8 @@ export default class principal extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.layerParede)
     this.physics.add.collider(this.personagem, this.layerSombra)
     this.physics.add.collider(this.personagem, this.portao2, this.portaofinal, null, this)
+    this.physics.add.collider(this.personagem, this.portao3, this.portaoalfabeto, null, this)
+    this.physics.add.collider(this.personagem, this.portao4, this.portaoresposta, null, this)
 
     this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
@@ -613,10 +623,18 @@ export default class principal extends Phaser.Scene {
         }
       }
     })
+
+    this.timerText = this.add.text(20, -5, 'Hora', {
+      fontFamily: 'Silkscreen',
+      fontSize: '25px',
+      stroke: '#000000',
+      strokeThickness: 4,
+      fill: '#ffffff'
+    }).setScrollFactor(0)
   }
 
   update () {
-    this.atualizarTemporizador()
+    this.timerText.setText(this.game.data_formatada)
 
     try {
       this.game.socket.emit('estado-publicar', this.game.sala, {
@@ -725,28 +743,14 @@ export default class principal extends Phaser.Scene {
     this.scene.start('creditos')
   }
 
-  exibirTemporizador () {
-    this.temporizadorTexto = this.add.text(600, 30, '', {
-      fontFamily: 'Arial',
-      fontSize: '20px',
-      color: '#ffffff'
-    }).setScrollFactor(0)
-
-    this.atualizarTemporizador()
+  portaoalfabeto (personagem, portao3) {
+    this.scene.stop('principal')
+    this.scene.start('alfabeto')
   }
 
-  atualizarTemporizador () {
-    const minutos = Math.floor(this.tempoRestante / 60)
-    const segundos = this.tempoRestante % 60
-
-    this.temporizadorTexto.setText(`Tempo: ${minutos}:${segundos}`)
-
-    if (this.tempoRestante > 0) {
-      this.tempoRestante--
-    } else {
-      this.game.scene.stop('principal')
-      this.game.scene.start('finaltriste')
-    }
+  portaoresposta (personagem, portao4) {
+    this.scene.stop('principal')
+    this.scene.start('resposta')
   }
 
   portao_descendo (personagem, portao) {
