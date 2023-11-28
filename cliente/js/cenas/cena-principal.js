@@ -136,6 +136,7 @@ export default class principal extends Phaser.Scene {
 
     this.portao2 = this.physics.add.sprite(3670, 5189, 'portao2', 0)
       .setImmovable(true)
+
     this.portao = this.physics.add.sprite(2338, 1340, 'portao', 0)
       .setImmovable(true)
 

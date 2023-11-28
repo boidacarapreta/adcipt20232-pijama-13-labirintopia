@@ -60,7 +60,7 @@ class Game extends Phaser.Game {
     this.scene.add('creditos', creditos)
     this.scene.add('finalfeliz', finalfeliz)
 
-    this.data = new Date('2024-10-01T00:10:00.000')
+    this.data = new Date('2024-10-01T00:00:30.000')
     this.data_formatada = ''
     setInterval(() => {
       this.data = new Date(this.data.getTime() - 1000) // Incrementa em 1 segundo o relógio
@@ -73,10 +73,10 @@ class Game extends Phaser.Game {
 
       /* Verifica se já chegou a meia noite */
       // this.fimDoJogo = new Date("2024-01-01T00:00:00.000");
-      this.fimDoJogo = new Date('2024-01-01T00:00:00.000')
+      this.fimDoJogo = new Date('2024-10-01T00:00:00.000')
       if (this.data.getTime() === this.fimDoJogo.getTime()) {
-        this.scene.stop('principal')
-        this.scene.start('finaltriste')
+        this.game.scene.stop('principal')
+        this.game.scene.start('finaltriste')
       }
     }, 1000)
 

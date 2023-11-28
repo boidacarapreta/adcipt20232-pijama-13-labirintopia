@@ -24,10 +24,20 @@ export default class alfabeto extends Phaser.Scene {
       frameHeight: 33
 
     })
+    this.load.spritesheet('direita', '../assets/botoes/direitaa.png', {
+      frameWidth: 64,
+      frameHeight: 64
+    })
   }
 
   create () {
     this.imagem = this.add.image(400, 225, 'fundodesafio')
+    this.image = this.add.sprite(720, 400, 'direita')
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.game.scene.stop('alfabeto')
+        this.game.scene.resume('principal')
+      })
 
     /* alfabeto no local */
     this.alfabeto = [
