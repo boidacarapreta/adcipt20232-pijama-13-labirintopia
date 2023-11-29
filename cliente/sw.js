@@ -83,10 +83,21 @@ const precacheResources = [
   './assets/portao4.png',
   './assets/resposta.png',
   './assets/salas.png',
-  './assets/respiração.mp4',
-  './assets/telainicial.png',
+  // './assets/respiração.mp4',
+  './assets/tela-inicial.png',
   './assets/telafinal.png',
-  '/dist/index.js'
+  '/js/cenas/cena-alfabeto.js',
+  '/js/cenas/cena-creditos.js',
+  '/js/cenas/cena-final-feliz.js',
+  '/js/cenas/cena-game-over.js',
+  '/js/cenas/cena-principal.js',
+  '/js/cenas/cena-resposta.js',
+  '/js/cenas/cena-sala.js',
+  '/js/cenas/cena0.js',
+  '/js/axios.min.js',
+  '/js/config.js',
+  '/js/index.js',
+  '/js/phaser.min.js'
 ]
 
 // When the service worker is installing, open the cache and add the precache resources to it
