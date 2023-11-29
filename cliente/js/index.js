@@ -75,8 +75,8 @@ class Game extends Phaser.Game {
       // this.fimDoJogo = new Date("2024-01-01T00:00:00.000");
       this.fimDoJogo = new Date('2024-10-01T00:00:00.000')
       if (this.data.getTime() === this.fimDoJogo.getTime()) {
-        this.game.scene.stop('principal')
-        this.game.scene.start('finaltriste')
+        this.scene.stop('principal')
+        this.scene.start('finaltriste')
       }
     }, 1000)
 
