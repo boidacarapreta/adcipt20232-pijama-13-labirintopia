@@ -16,8 +16,8 @@ export default class resposta extends Phaser.Scene {
     this.image = this.add.sprite(720, 400, 'direita')
       .setInteractive()
       .on('pointerdown', () => {
-        this.game.scene.stop('resposta')
         this.game.scene.resume('principal')
+        this.game.scene.stop('resposta')
       })
   }
 

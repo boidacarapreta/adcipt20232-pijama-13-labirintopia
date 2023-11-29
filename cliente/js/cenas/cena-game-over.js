@@ -13,6 +13,7 @@ export default class finaltriste extends Phaser.Scene {
     this.image = this.add.image(400, 408, 'grade')
       .setInteractive()
       .on('pointerdown', () => {
+        //this.game.data = new Date('2024-01-01T00:00:30.000')
         this.game.scene.stop('finaltriste')
         this.game.scene.start('cena0')
       })

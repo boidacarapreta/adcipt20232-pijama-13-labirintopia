@@ -635,9 +635,8 @@ export default class principal extends Phaser.Scene {
   }
 
   update () {
-    this.timerText.setText(this.game.data_formatada)
-
     try {
+      this.timerText.setText(this.game.data_formatada)
       this.game.socket.emit('estado-publicar', this.game.sala, {
         x: this.personagem.x,
         y: this.personagem.y,
