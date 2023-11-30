@@ -64,7 +64,6 @@ class Game extends Phaser.Game {
     this.data_formatada = ''
     setInterval(() => {
       this.data = new Date(this.data.getTime() - 1000) // Incrementa em 1 segundo o relógio
-      console.log(this.data)
       this.data_formatada =
         (this.data.getMinutes() < 10 ? '0' : '') + // Adiciona 0 quando necessário
         this.data.getMinutes() +

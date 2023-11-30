@@ -32,7 +32,7 @@ export default class alfabeto extends Phaser.Scene {
 
   create () {
     this.imagem = this.add.image(400, 225, 'fundodesafio')
-    //if (this.image = this.add.sprite(720, 400, 'direita')
+    // if (this.image = this.add.sprite(720, 400, 'direita')
     //   .setInteractive()
     //   .on('pointerdown', () => {
     //     this.game.scene.stop('alfabeto')
@@ -314,25 +314,24 @@ export default class alfabeto extends Phaser.Scene {
               this.add.image(720, 400, 'direita')
                 .setInteractive()
                 .on('pointerdown', () => {
-                  this.game.scene.resume('principal')
                   this.game.scene.stop('alfabeto')
+                  this.game.scene.resume('principal')
                 })
               this.alfabeto.forEach((index) => {
                 this.alfabeto[index].objeto.setVisible(false)
-
               })
             } else {
               this.game.verifica_alfabeto = 'F'
             }
 
-            /*if (this.game.verifica_alfabeto === 'V') {
+            /* if (this.game.verifica_alfabeto === 'V') {
               this.add.image(720, 400, 'direita')
                 .setInteractive()
                 .on('pointerdown', () => {
                   this.game.scene.stop('alfabeto')
                   this.game.scene.resume('principal')
                 })
-            }*/
+            } */
           }
         })
     })
