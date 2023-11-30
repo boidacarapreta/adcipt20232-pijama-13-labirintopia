@@ -25,8 +25,8 @@ export default class alfabeto extends Phaser.Scene {
 
     })
     this.load.spritesheet('direita', '../assets/botoes/direitaa.png', {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 40,
+      frameHeight: 40
     })
   }
 
