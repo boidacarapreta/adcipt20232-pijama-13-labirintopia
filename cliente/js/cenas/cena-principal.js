@@ -744,15 +744,15 @@ export default class principal extends Phaser.Scene {
   };
 
   portaoalfabeto (personagem, portao3) {
-    this.portaoalfabeto.disableBody(true, true)
     this.scene.pause('principal')
     this.scene.launch('alfabeto')
+    this.portao3.destroy()
   }
 
   portaoresposta (personagem, portao4) {
-    this.portaoalfabeto.disableBody(true, true)
     this.scene.pause('principal')
     this.scene.launch('resposta')
+    this.portao4.destroy()
   }
 
   portao_descendo (personagem, portao) {
