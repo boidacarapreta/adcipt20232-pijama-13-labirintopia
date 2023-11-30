@@ -11,13 +11,13 @@ export default class desafiofinal extends Phaser.Scene {
 
   create () {
     this.imagem = this.add.image(400, 225, 'escolhas')
-    this.image = this.add.image(450, 350, 'gradecontinuar')
+    this.image = this.add.image(430, 350, 'gradecontinuar')
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('desafiofinal')
         this.game.scene.resume('principal')
       })
-    this.image = this.add.image(400, 408, 'gradedesistir')
+    this.image = this.add.image(250, 350, 'gradedesistir')
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('desafiofinal')
