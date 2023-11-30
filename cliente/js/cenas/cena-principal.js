@@ -41,6 +41,10 @@ export default class principal extends Phaser.Scene {
       frameWidth: 45,
       frameHeight: 45
     })
+    this.load.spritesheet('moedaa', './assets/moedaa.png', {
+      frameWidth: 45,
+      frameHeight: 45
+    })
 
     this.load.audio('moeda-som', '../assets/audiomoeda.mp3')
     this.load.audio('ambiente-som', '../assets/audioambiente.mp3')
@@ -138,6 +142,9 @@ export default class principal extends Phaser.Scene {
       .setImmovable(true)
 
     this.portao = this.physics.add.sprite(2338, 1340, 'portao', 0)
+      .setImmovable(true)
+
+    this.moedaa = this.physics.add.sprite(2369, 4920, 'moedaa', 0)
       .setImmovable(true)
 
     // this.portao.objeto.anims.play('portao-descendo')
@@ -598,6 +605,7 @@ export default class principal extends Phaser.Scene {
     this.physics.add.collider(this.personagem, this.portao2, this.portaofinal, null, this)
     this.physics.add.collider(this.personagem, this.portao3, this.portaoalfabeto, null, this)
     this.physics.add.collider(this.personagem, this.portao4, this.portaoresposta, null, this)
+    this.physics.add.collider(this.personagem, this.moedaa, this.desafiofinal, null, this)
 
     this.game.socket.on('estado-notificar', ({ x, y, frame }) => {
       this.personagemRemoto.x = x
@@ -739,9 +747,11 @@ export default class principal extends Phaser.Scene {
   }
 
   portaofinal (personagem, portao2) {
-    this.scene.stop('principal')
-    this.scene.start('creditos')
-  };
+    if (this.game.scoreCoração.score === this.coração.length) {
+      this.scene.stop('principal')
+      this.scene.start('creditos')
+    }
+  }
 
   portaoalfabeto (personagem, portao3) {
     this.scene.pause('principal')
@@ -753,6 +763,12 @@ export default class principal extends Phaser.Scene {
     this.scene.pause('principal')
     this.scene.launch('resposta')
     this.portao4.destroy()
+  }
+
+  desafiofinal (personagem, moedaa) {
+    this.scene.pause('principal')
+    this.scene.launch('desafiofinal')
+    this.moedaa.destroy()
   }
 
   portao_descendo (personagem, portao) {
