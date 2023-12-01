@@ -749,7 +749,7 @@ export default class principal extends Phaser.Scene {
   portaofinal (personagem, portao2) {
     if (this.game.scoreCoração.score === this.coração.length) {
       this.scene.stop('principal')
-      this.scene.start('creditos')
+      this.scene.start('finalfeliz')
     }
   }
 

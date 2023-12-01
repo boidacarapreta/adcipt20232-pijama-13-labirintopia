@@ -14,7 +14,7 @@ export default class finalfeliz extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('finalfeliz')
-        this.game.scene.start('cena0')
+        this.game.scene.start('creditos')
       })
   }
 

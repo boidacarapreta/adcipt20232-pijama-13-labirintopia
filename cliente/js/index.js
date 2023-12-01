@@ -64,7 +64,7 @@ class Game extends Phaser.Game {
     this.scene.add('desafiofinal', desafiofinal)
     this.scene.add('finalfeliz', finalfeliz)
 
-    this.data = new Date('2024-01-01T00:15:00.000')
+    this.data = new Date('2024-01-01T00:20:00.000')
     this.data_formatada = ''
     setInterval(() => {
       this.data = new Date(this.data.getTime() - 1000) // Incrementa em 1 segundo o relógio
