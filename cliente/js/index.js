@@ -9,6 +9,7 @@ import finaltriste from './cenas/cena-game-over.js'
 import finalfeliz from './cenas/cena-final-feliz.js'
 import creditos from './cenas/cena-creditos.js'
 import resposta from './cenas/cena-resposta.js'
+import gameover from './cenas/cenagameover.js'
 import desafiofinal from './cenas/desafiofinal.js'
 
 class Game extends Phaser.Game {
@@ -59,6 +60,7 @@ class Game extends Phaser.Game {
     this.scene.add('resposta', resposta)
     this.scene.add('finaltriste', finaltriste)
     this.scene.add('creditos', creditos)
+    this.scene.add('gameover', gameover)
     this.scene.add('desafiofinal', desafiofinal)
     this.scene.add('finalfeliz', finalfeliz)
 

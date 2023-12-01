@@ -21,7 +21,7 @@ export default class desafiofinal extends Phaser.Scene {
       .setInteractive()
       .on('pointerdown', () => {
         this.game.scene.stop('desafiofinal')
-        this.game.scene.start('finaltriste')
+        this.game.scene.start('gameover')
       })
   }
 
