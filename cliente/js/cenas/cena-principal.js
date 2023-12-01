@@ -527,7 +527,7 @@ export default class principal extends Phaser.Scene {
         this.esquerda.setFrame(1)
         if (this.morte.visible) {
           this.personagem.anims.play('personagem-cima')
-          this.personagem.setVelocityY(this.velocidade)
+          this.personagem.setVelocityX(this.velocidade)
         } else {
           this.personagem.anims.play('personagem-esquerda')
           this.personagem.setVelocityX(-this.velocidade)
@@ -546,7 +546,7 @@ export default class principal extends Phaser.Scene {
         this.direita.setFrame(1)
         if (this.morte.visible) {
           this.personagem.anims.play('personagem-esquerda')
-          this.personagem.setVelocityY(-this.velocidade)
+          this.personagem.setVelocityX(-this.velocidade)
         } else {
           this.personagem.anims.play('personagem-direita')
           this.personagem.setVelocityX(this.velocidade)
@@ -628,6 +628,8 @@ export default class principal extends Phaser.Scene {
         for (let i = 0; i < artefatos.coração.length; i++) {
           if (!artefatos.coração[i]) {
             this.coração[i].objeto.disableBody(true, true)
+            this.game.scoreCoração.score++
+            this.textoCoração.setText(`coração: ${this.game.scoreCoração.score}`)
           }
         }
       }
