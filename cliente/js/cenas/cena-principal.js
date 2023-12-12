@@ -625,6 +625,7 @@ export default class principal extends Phaser.Scene {
         }
       }
       if (artefatos.coração) {
+        this.game.scoreCoração.score = 0
         for (let i = 0; i < artefatos.coração.length; i++) {
           if (!artefatos.coração[i]) {
             this.coração[i].objeto.disableBody(true, true)
